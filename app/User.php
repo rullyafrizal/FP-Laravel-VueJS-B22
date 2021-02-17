@@ -59,7 +59,11 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        if($this->role_id == 0)
+        //query uuid dari admin
+        $admin = Role::where('role_name', 'admin')->first()->id;
+
+        //logika midleware
+        if($this->role_id == $admin)
         {
             return true;
         }

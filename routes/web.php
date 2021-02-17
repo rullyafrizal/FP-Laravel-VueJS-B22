@@ -11,6 +11,8 @@
 |
 */
 
+use App\Role;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -25,5 +27,10 @@ Route::middleware(['auth', 'emailVerified'])->group(function(){
 
 Route::middleware(['auth', 'emailVerified', 'admin'])->group(function(){
     Route::get('/route-2', 'PageController@route2');
+});
+
+Route::get('/testing', function (){
+    $roles = Role::where('role_name', 'user')->first()->id;
+    dd($roles);
 });
 

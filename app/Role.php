@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\SetupUUID;
+use App\Traits\UUIDRole;
 use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model

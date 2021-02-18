@@ -27,7 +27,8 @@ class AddUserIdToOtpCodesTable extends Migration
     public function down()
     {
         Schema::table('otp_codes', function (Blueprint $table) {
-            //
+            $table->dropForeign(['user_id']);
+            $table->dropColumn(['user_id']);
         });
     }
 }

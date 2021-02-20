@@ -3,40 +3,58 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\VerifiesEmails;
+use App\OTP_Code;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class VerificationController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Email Verification Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling email verification for any
-    | user that recently registered with the application. Emails may also
-    | be re-sent if the user didn't receive the original email message.
-    |
-    */
-
-    use VerifiesEmails;
-
     /**
-     * Where to redirect users after verification.
+     * Handle the incoming request.
      *
-     * @var string
+     * @param Request $request
+     * @return JsonResponse
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __invoke(Request $request)
     {
-        $this->middleware('auth');
-        $this->middleware('signed')->only('verify');
-        $this->middleware('throttle:6,1')->only('verify', 'resend');
+        $kodeOTP = OTP_Code::where('otp', request('otp'))->first();
+
+        if(!$kodeOTP)
+        {
+            return response()->json([
+                'response_code' => '01',
+                'response_message' => 'Kode OTP Salah'
+            ], 200);
+        }
+
+        $currentTime = Carbon::now()->toTimeString();
+
+        if($currentTime > $kodeOTP->valid_until)
+        {
+            return response()->json([
+                'response_code' => '01',
+                'response_message' => 'Kode OTP sudah tidak valid, silahkan generate ulang',
+            ], 200);
+        }
+
+        $user = User::find($kodeOTP->user_id);
+        $user->email_verified_at = Carbon::now();
+        $user->save();
+
+        $kodeOTP->delete();
+        $data['user'] = $user;
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'verifikasi berhasil',
+            'data' => [
+                'user' => $user->toArray(),
+            ]
+        ]);
+
+
+
     }
 }

@@ -3,71 +3,53 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\OTP_Code;
+
 use App\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
-    use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
+     * Handle the incoming request.
      *
-     * @var string
+     * @param RegisterRequest $request
+     * @param $identifier
+     * @return \Illuminate\Http\JsonResponse
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __invoke(RegisterRequest $request, User $user)
     {
-        $this->middleware('guest');
-    }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        function generateOTP(){
+            $generator = '1234567890';
+            $result = "";
+
+            for ($i = 1; $i <= 6; $i++) {
+                $result .= substr($generator, (rand()%(strlen($generator))), 1);
+            }
+            return $result;
+        }
+
+
+        User::create([
+            'name' => request('name'),
+            'email' => request('email'),
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        OTP_Code::create([
+            'user_id' => User::where('email', request('email'))->first()->id,
+            'otp' => generateOTP(),
+            'valid_until' => Carbon::now()->addMinutes(5),
+        ]);
+
+        return response()->json([
+            'response_code' => '00',
+            'response_message' => 'OTP terkirim, silahkan cek email',
+            'data' => [
+                'user' => User::where('email', request('email'))->first()->toArray(),
+            ]
         ]);
     }
 }

@@ -11,13 +11,16 @@
 |
 */
 
+use App\OTP_Code;
 use App\Role;
+use App\User;
+use Carbon\Carbon;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -30,7 +33,8 @@ Route::middleware(['auth', 'emailVerified', 'admin'])->group(function(){
 });
 
 Route::get('/testing', function (){
-    $roles = Role::where('role_name', 'user')->first()->id;
+    $roles = Carbon::now()->toTimeString();
+
     dd($roles);
 });
 

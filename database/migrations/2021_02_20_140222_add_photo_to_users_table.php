@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOtpCodesTable extends Migration
+class AddPhotoToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateOtpCodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('otp_codes', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('otp');
-            $table->time('valid_until');
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('photo')->nullable(true)->after('email');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateOtpCodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('otp_codes');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['photo']);
+        });
     }
 }

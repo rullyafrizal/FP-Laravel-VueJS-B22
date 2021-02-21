@@ -11,7 +11,7 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
 });
 
 
-Route::group(['prefix' => 'profile', 'middleware' => ['auth']], function () {
+Route::group(['prefix' => 'profile', 'middleware' => ['auth:api']], function () {
     Route::get('/get-profile', 'UserController');
     Route::post('/update-profile', 'UpdateProfileController');
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller
@@ -21,24 +22,30 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        try {
+            if(!$token = auth()->attempt($request->only('email', 'password')))
+            {
+                return response()->json([
+                    'response code' => '01',
+                    'response_message' => 'Email/Password Salah'
+                ], 401);
+            }
 
-        if(!$token = auth()->attempt($request->only('email', 'password')))
-        {
+            $user = User::where('email', request('email'))->first()->toArray();
+
             return response()->json([
-                'response code' => '01',
-                'response_message' => 'Email/Password Salah'
-            ], 401);
+                'response_code' => '00',
+                'response_message' => 'User berhasil login',
+                'data' => [
+                    'token' => $token,
+                    'user' => $user
+                ]
+            ]);
+        } catch (QueryException $ex) {
+            return response()->json([
+                'message' => "Failed $ex->errorInfo"
+            ]);
         }
 
-        $user = User::where('email', request('email'))->first()->toArray();
-
-        return response()->json([
-            'response_code' => '00',
-            'response_message' => 'User berhasil login',
-            'data' => [
-                'token' => $token,
-                'user' => $user
-            ]
-        ]);
     }
 }

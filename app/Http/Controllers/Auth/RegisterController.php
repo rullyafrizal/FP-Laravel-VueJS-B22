@@ -8,6 +8,7 @@ use App\OTP_Code;
 
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Database\QueryException;
 
 class RegisterController extends Controller
 {
@@ -33,23 +34,33 @@ class RegisterController extends Controller
         }
 
 
-        User::create([
-            'name' => request('name'),
-            'email' => request('email'),
-        ]);
+        try
+        {
+            User::create([
+                'name' => request('name'),
+                'email' => request('email'),
+            ]);
 
-        OTP_Code::create([
-            'user_id' => User::where('email', request('email'))->first()->id,
-            'otp' => generateOTP(),
-            'valid_until' => Carbon::now()->addMinutes(5),
-        ]);
+            $user = User::where('email', request('email'))->first();
 
-        return response()->json([
-            'response_code' => '00',
-            'response_message' => 'OTP terkirim, silahkan cek email',
-            'data' => [
-                'user' => User::where('email', request('email'))->first()->toArray(),
-            ]
-        ]);
+            OTP_Code::create([
+                'user_id' => $user->id,
+                'otp' => generateOTP(),
+                'valid_until' => Carbon::now()->addMinutes(5),
+            ]);
+
+            return response()->json([
+                'response_code' => '00',
+                'response_message' => 'OTP terkirim, silahkan cek email',
+                'data' => [
+                    'user' => $user->toArray(),
+                ]
+            ]);
+        } catch (QueryException $ex) {
+            return response()->json([
+               'message' => "Failed $ex->errorInfo"
+            ]);
+        }
+
     }
 }

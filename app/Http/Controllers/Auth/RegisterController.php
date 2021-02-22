@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegisteredEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\OTP_Code;
@@ -23,19 +24,8 @@ class RegisterController extends Controller
     public function __invoke(RegisterRequest $request, User $user)
     {
 
-        function generateOTP(){
-            $generator = '1234567890';
-            $result = "";
 
-            for ($i = 1; $i <= 6; $i++) {
-                $result .= substr($generator, (rand()%(strlen($generator))), 1);
-            }
-            return $result;
-        }
-
-
-        try
-        {
+        try {
             User::create([
                 'name' => request('name'),
                 'email' => request('email'),
@@ -45,20 +35,24 @@ class RegisterController extends Controller
 
             OTP_Code::create([
                 'user_id' => $user->id,
-                'otp' => generateOTP(),
+                'otp' => User::generateOTP(),
                 'valid_until' => Carbon::now()->addMinutes(5),
             ]);
+
+            $otp = OTP_Code::where('user_id', $user->id)->first();
+
+            event(new UserRegisteredEvent($user, $otp));
+
+            $data['user'] = $user;
 
             return response()->json([
                 'response_code' => '00',
                 'response_message' => 'OTP terkirim, silahkan cek email',
-                'data' => [
-                    'user' => $user->toArray(),
-                ]
+                'data' => $data,
             ]);
         } catch (QueryException $ex) {
             return response()->json([
-               'message' => "Failed $ex->errorInfo"
+                'message' => "Failed $ex->errorInfo"
             ]);
         }
 

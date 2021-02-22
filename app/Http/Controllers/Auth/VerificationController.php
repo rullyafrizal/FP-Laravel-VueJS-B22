@@ -49,9 +49,8 @@ class VerificationController extends Controller
             return response()->json([
                 'response_code' => '00',
                 'response_message' => 'verifikasi berhasil',
-                'data' => [
-                    'user' => $user->toArray(),
-                ]
+                'data' => $data,
+
             ]);
         } catch (QueryException $ex) {
             return response()->json([

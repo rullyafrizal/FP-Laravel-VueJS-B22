@@ -14,8 +14,8 @@ class OTP_Code extends Model
         parent::boot();
         static::creating(function ($model) {
             try {
-                if(!$model->getKey()){
-                    $model->{$model->getKeyName()} = (string) Str::uuid();
+                if (!$model->getKey()) {
+                    $model->{$model->getKeyName()} = (string)Str::uuid();
                 }
             } catch (UnsatisfiedDependencyException $e) {
                 abort(500, $e->getMessage());

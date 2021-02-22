@@ -71,8 +71,7 @@ class User extends Authenticatable implements JWTSubject
 
     public function emailVerified()
     {
-        if($this->email_verified_at !== null)
-        {
+        if ($this->email_verified_at !== null) {
             return true;
         }
         return false;
@@ -84,10 +83,21 @@ class User extends Authenticatable implements JWTSubject
         $admin = Role::where('role_name', 'admin')->first()->id;
 
         //logika midleware
-        if($this->role_id == $admin)
-        {
+        if ($this->role_id == $admin) {
             return true;
         }
         return false;
     }
+
+    public static function generateOTP()
+    {
+        $generator = '1234567890';
+        $result = "";
+
+        for ($i = 1; $i <= 6; $i++) {
+            $result .= substr($generator, (rand() % (strlen($generator))), 1);
+        }
+        return $result;
+    }
+
 }

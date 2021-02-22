@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\UserRegisteredEvent;
 use App\Http\Controllers\Controller;
 use App\OTP_Code;
 use App\User;
@@ -24,47 +25,37 @@ class RegenerateOTPController extends Controller
             'email' => 'required|email'
         ]);
 
-        function generateOTP()
-        {
-            $generator = '1234567890';
-            $result = "";
-
-            for ($i = 1; $i <= 6; $i++) {
-                $result .= substr($generator, (rand() % (strlen($generator))), 1);
-            }
-            return $result;
-        }
-
         try {
-            $email = User::where('email', request('email'))->first();
+            $user = User::where('email', request('email'))->first();
 
-            if (!$email) {
+            if (!$user) {
                 return response()->json([
                     'response_code' => '01',
                     'response_message' => 'Alamat Email Salah'
                 ], 200);
             }
 
-            $user = $email->toArray();
+            $data['user'] = $user;
 
             $user_id = User::with('otp_code')->where('email', request('email'))
                 ->firstOrFail()
                 ->otp_code()
-                ->firstOrFail()
-                ->user_id;
+                ->firstOrFail();
 
-            OTP_Code::where('user_id', $user_id)->update([
-                'user_id' => User::where('email', request('email'))->first()->id,
-                'otp' => generateOTP(),
+            OTP_Code::where('user_id', $user_id->user_id)->update([
+                'user_id' => $user->id,
+                'otp' => User::generateOTP(),
                 'valid_until' => Carbon::now()->addMinutes(5),
             ]);
+
+            $otp = OTP_Code::where('user_id', $user->id)->first();;
+
+            event(new UserRegisteredEvent($user, $otp));
 
             return response()->json([
                 'response_code' => '00',
                 'response_message' => 'OTP baru telah terkirim, silahkan cek email',
-                'data' => [
-                    'user' => $user
-                ]
+                'data' => $data
             ]);
         } catch (QueryException $ex) {
             return response()->json([

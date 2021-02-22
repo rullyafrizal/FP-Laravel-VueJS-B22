@@ -33,12 +33,13 @@ class UpdateProfileController extends Controller
             $user->photo = $nama_file;
             $user->save();
 
+            $data['profile'] = $user;
+
             return response()->json([
                 'response_code' => '00',
                 'response_message' => 'Profile berhasil diperbarui',
-                'data' => [
-                    'profile' => $request->user()->toArray(),
-                ]
+                'data' => $data,
+
             ]);
         } catch (QueryException $ex) {
             return response()->json([

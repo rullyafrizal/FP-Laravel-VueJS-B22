@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use  App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ class LoginController extends Controller
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function __invoke(Request $request)
@@ -23,8 +23,7 @@ class LoginController extends Controller
         ]);
 
         try {
-            if(!$token = auth()->attempt($request->only('email', 'password')))
-            {
+            if (!$token = auth()->attempt($request->only('email', 'password'))) {
                 return response()->json([
                     'response code' => '01',
                     'response_message' => 'Email/Password Salah'

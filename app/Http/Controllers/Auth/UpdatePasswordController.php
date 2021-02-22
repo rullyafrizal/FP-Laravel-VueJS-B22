@@ -37,12 +37,13 @@ class UpdatePasswordController extends Controller
                 ['password' => bcrypt(request('password'))]
             );
 
+            $data['user'] = $email;
+
             return response()->json([
                 'response_code' => '00',
                 'response_message' => 'Password berhasil diubah',
-                'data' => [
-                    'user' => $email->toArray(),
-                ]
+                'data' => $data,
+
             ]);
         } catch (QueryException $ex) {
             return response()->json([

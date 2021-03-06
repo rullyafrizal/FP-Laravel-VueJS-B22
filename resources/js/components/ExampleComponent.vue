@@ -6,7 +6,7 @@
                     <div class="card-header">Example Component</div>
 
                     <div class="card-body">
-                        I'm an example component.
+                        Ini Component pertama saya di Vue.js
                     </div>
                 </div>
             </div>

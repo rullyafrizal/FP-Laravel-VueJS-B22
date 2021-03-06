@@ -11,14 +11,9 @@
 |
 */
 
-use App\OTP_Code;
-use App\Role;
-use App\User;
-use Carbon\Carbon;
-
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 //Auth::routes();
 
@@ -35,4 +30,6 @@ Route::middleware(['auth', 'emailVerified', 'admin'])->group(function () {
 Route::get('/testing', function () {
 //    return view('send_email_user_registered');
 });
+
+Route::view('/{any?}', 'app')->where('any', '.*');
 

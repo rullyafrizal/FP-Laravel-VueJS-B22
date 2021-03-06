@@ -1,6 +1,5 @@
 <?php
 
-
 Route::namespace('Auth')->prefix('auth')->group(function () {
     Route::post('/register', 'RegisterController');
     Route::post('/login', 'LoginController')->middleware('emailVerified');
@@ -16,4 +15,26 @@ Route::group(['prefix' => 'profile', 'middleware' => ['auth:api']], function () 
     Route::post('/update-profile', 'UpdateProfileController');
 });
 
+
+Route::group(['middleware' => ['api', 'emailVerified', 'auth:api']], function(){
+    Route::get('profile/show', 'ProfileController@show');
+    Route::post('profile/update', 'ProfileController@update');
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'campaign',
+], function(){
+    Route::get('random/{count}', 'CampaignController@random');
+    Route::post('store', 'CampaignController@store');
+    Route::get('/', 'CampaignController@index');
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'blog',
+], function(){
+    Route::get('random/{count}', 'BlogController@random');
+    Route::post('store', 'BlogController@store');
+});
 

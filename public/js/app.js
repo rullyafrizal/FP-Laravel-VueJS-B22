@@ -3480,7 +3480,8 @@ var render = function() {
                       _vm._s(new Date().getFullYear()) +
                       " — "
                   ),
-                  _c("strong", [_vm._v("Equifund")])
+                  _c("strong", [_vm._v("Equifund")]),
+                  _vm._v(" — by Rully Afrizal Alwin\n            ")
                 ]
               )
             ],

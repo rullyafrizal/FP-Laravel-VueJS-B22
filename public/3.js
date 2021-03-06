@@ -13,12 +13,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Campaigns",
   data: function data() {
     return {
-      campaigns: []
+      campaigns: [],
+      page: 0,
+      lengthPage: 0
     };
+  },
+  created: function created() {
+    this.go();
+  },
+  methods: {
+    go: function go() {
+      var _this = this;
+
+      var url = 'api/campaign?page=' + this.page;
+      axios.get(url).then(function (response) {
+        var data = response.data.data;
+        _this.campaigns = data.campaigns.data;
+        _this.page = data.campaigns.current_page;
+        _this.lengthPage = data.campaigns.last_page;
+      })["catch"](function (error) {
+        var responses = error.responses;
+        console.log(responses);
+      });
+    }
   }
 });
 
@@ -39,7 +74,62 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "v-container",
+    { staticClass: "ma-0 pa-0", attrs: { "grid-list-sm": "" } },
+    [
+      _c("v-subheader", [_vm._v("\n        All Campaigns\n    ")]),
+      _vm._v(" "),
+      _c(
+        "v-layout",
+        { attrs: { wrap: "" } },
+        _vm._l(_vm.campaigns, function(campaign) {
+          return _c(
+            "v-flex",
+            { key: "campaign-" + campaign.id, attrs: { xs6: "" } },
+            [
+              _c(
+                "v-card",
+                { attrs: { to: "/campaign/" + campaign.id } },
+                [
+                  _c(
+                    "v-img",
+                    {
+                      staticClass: "white--text",
+                      attrs: { src: campaign.image }
+                    },
+                    [
+                      _c("v-card-title", {
+                        staticClass: "fill-height align-end",
+                        domProps: { textContent: _vm._s(campaign.title) }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        }),
+        1
+      ),
+      _vm._v(" "),
+      _c("v-pagination", {
+        attrs: { length: _vm.lengthPage, "total-visible": 6 },
+        on: { input: _vm.go },
+        model: {
+          value: _vm.page,
+          callback: function($$v) {
+            _vm.page = $$v
+          },
+          expression: "page"
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

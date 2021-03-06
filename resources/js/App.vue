@@ -85,7 +85,7 @@
         <v-footer dark padless>
             <v-card class="flex" flat tile>
                 <v-card-text class="py-4 white--text text-center">
-                    &copy;{{ new Date().getFullYear() }} — <strong>Equifund</strong>
+                    &copy;{{ new Date().getFullYear() }} — <strong>Equifund</strong> — by Rully Afrizal Alwin
                 </v-card-text>
             </v-card>
         </v-footer>

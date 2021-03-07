@@ -56,12 +56,10 @@
             <v-spacer></v-spacer>
 
             <v-btn icon>
-                <v-badge color="red" overlap>
-                    <template v-slot:badge>
-                        <span>3</span>
-                    </template>
+                <v-badge :content="count" :value="count" color="red" overlap>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
+
             </v-btn>
 
             <v-text-field class="mb-5 rounded-pill" slot="extension" hide-details append-icon="mdi-microphone" flat label="Pencarian" prepend-inner-icon="mdi-magnify" solo-inverted>
@@ -78,10 +76,7 @@
             <v-spacer></v-spacer>
 
             <v-btn icon>
-                <v-badge color="orange" overlap>
-                    <template v-slot:badge>
-                        <span>3</span>
-                    </template>
+                <v-badge :content="count" :value="count" color="red" overlap>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
             </v-btn>
@@ -129,9 +124,13 @@ export default {
     computed: {
         isHome(){
             return (this.$route.path === '/' || this.$route.path === '/home');
+        },
+        count(){
+            return this.$store.state.count
         }
-    }
+    },
 }
+
 </script>
 
 <style scoped>

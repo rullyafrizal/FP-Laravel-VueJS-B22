@@ -2,15 +2,18 @@
     <div>
         <v-row no-gutters>
             <v-col v-for="n in 2" :key="n" :cols="n === 1 ? 8 : 4">
-                <v-card v-if="n === 1 && campaign.id" class="pa-2 mr-2 rounded-xl" tile outlined>
+                <v-card v-if="n === 1 && campaign.id" class="pa-2 mr-2 rounded-xl" max-width="850" tile outlined>
                     <v-img :src="campaign.image" class="white--text rounded-xl" max-height="400px">
                         <v-card-title class="fill-height align-end" v-text="campaign.title"></v-card-title>
+                        <template v-slot:placeholder>
+                            <v-skeleton-loader type="image"></v-skeleton-loader>
+                        </template>
                     </v-img>
                     <v-card-text>
                         Description: <br> {{campaign.description}}
                     </v-card-text>
                 </v-card>
-                <v-card v-if="n === 2 && campaign.id" class="pa-2 ml-2 rounded-xl" tile-outlined>
+                <v-card v-else-if="n === 2 && campaign.id" elevation="5" class="pa-2 ml-2 rounded-xl" tile-outlined>
                     <v-card-text>
                         <v-simple-table dense>
                             <tbody>
@@ -19,7 +22,7 @@
                                 <td>{{campaign.address}}</td>
                             </tr>
                             <tr>
-                                <td><v-icon>mdi-phone</v-icon> Nomor Telepon</td>
+                                <td><v-icon>mdi-phone</v-icon> Telepon</td>
                                 <td>{{campaign.phone}}</td>
                             </tr>
                             <tr>
@@ -76,7 +79,7 @@ export default {
             })
         },
         donate(){
-            alert('donate')
+            return this.$store.state.count++
         },
         progress(campaign){
             return Math.round(campaign.collected / campaign.required * 100)

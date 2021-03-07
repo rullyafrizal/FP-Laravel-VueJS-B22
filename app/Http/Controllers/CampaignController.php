@@ -35,10 +35,11 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|max:100',
+            'title' => 'required|max:35',
             'description' => 'required|min:50|max:1000',
             'image' => 'required|mimes:jpg,jpeg,png',
             'address' => 'required',
+            'phone' => 'required|max:12',
             'collected' => 'required',
             'required' => 'required'
         ]);
@@ -48,7 +49,8 @@ class CampaignController extends Controller
             'description' => request('description'),
             'address' => request('address'),
             'collected' => request('collected'),
-            'required' => request('required')
+            'required' => request('required'),
+            'phone' => request('phone')
         ]);
 
         if($request->hasFile('image'))

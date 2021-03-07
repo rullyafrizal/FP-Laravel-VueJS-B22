@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class CampaignController extends Controller
 {
     public function index(){
-        $campaigns = Campaign::paginate(6);
+        $campaigns = Campaign::orderBy('created_at', 'desc')->paginate(6);
 
         $data['campaigns'] = $campaigns;
 
@@ -35,14 +35,20 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|max:255',
+            'title' => 'required|max:100',
             'description' => 'required|min:50|max:1000',
-            'image' => 'required|mimes:jpg,jpeg,png'
+            'image' => 'required|mimes:jpg,jpeg,png',
+            'address' => 'required',
+            'collected' => 'required',
+            'required' => 'required'
         ]);
 
         $campaign = Campaign::create([
             'title' => request('title'),
             'description' => request('description'),
+            'address' => request('address'),
+            'collected' => request('collected'),
+            'required' => request('required')
         ]);
 
         if($request->hasFile('image'))
@@ -68,5 +74,26 @@ class CampaignController extends Controller
                 ]);
             }
         }
+
+        $data['campaign'] = $campaign;
+
+        return response()->json([
+           'response_code' => '00',
+           'response_message' => 'Campaign berhasil diupload',
+            'data' => $data
+        ]);
+    }
+
+    public function detail($id)
+    {
+        $campaign = Campaign::findOrFail($id);
+
+        $data['campaign'] = $campaign;
+
+        return response()->json([
+           'response_code' => '00',
+           'response_message' => 'Detail Campaign berhasil ditampilkan',
+           'data' => $data
+        ]);
     }
 }

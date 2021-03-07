@@ -16,7 +16,7 @@
                 </v-list-item>
 
                 <div class="pa-2" v-if="guest">
-                    <v-btn block color="primary" class="mb-1">
+                    <v-btn block color="primary" class="mb-1 rounded-pill">
                         <v-icon left>mdi-account</v-icon>
                         Register
                     </v-btn>
@@ -38,7 +38,7 @@
 
             <template v-slot:append v-if="!guest">
                     <div class="pa-2">
-                        <v-btn block color="red" dark>
+                        <v-btn block color="red" class="rounded-pill" dark>
                             <v-icon left>mdi-lock</v-icon>
                             Logout
                         </v-btn>
@@ -47,10 +47,10 @@
         </v-navigation-drawer>
 
         <!--Header-->
-        <v-app-bar app color="success" dark v-if="isHome">
+        <v-app-bar app color="indigo darken-4" dark v-if="isHome">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-            <v-toolbar-title>CrowdFunding Website</v-toolbar-title>
+            <v-toolbar-title><strong>Equifund</strong></v-toolbar-title>
 
         <!--Pemisah Konten-->
             <v-spacer></v-spacer>
@@ -64,15 +64,16 @@
                 </v-badge>
             </v-btn>
 
-            <v-text-field class="mb-4" slot="extension" hide-details append-icon="mdi-microphone" flat label="Pencarian" prepend-inner-icon="mdi-magnify" solo-inverted>
+            <v-text-field class="mb-5 rounded-pill" slot="extension" hide-details append-icon="mdi-microphone" flat label="Pencarian" prepend-inner-icon="mdi-magnify" solo-inverted>
 
             </v-text-field>
         </v-app-bar>
 
-        <v-app-bar app color="success" dark v-else>
+        <v-app-bar app color="indigo darken-4" dark v-else>
             <v-btn icon @click.stop="$router.go(-1)">
                 <v-icon>mdi-arrow-left-circle</v-icon>
             </v-btn>
+            <v-toolbar-title><strong>Equifund</strong></v-toolbar-title>
 
             <v-spacer></v-spacer>
 
@@ -98,12 +99,10 @@
             </v-container>
         </v-main>
 
-        <v-footer dark padless>
-            <v-card class="flex" flat tile>
-                <v-card-text class="py-4 white--text text-center">
-                    &copy;{{ new Date().getFullYear() }} — <strong>Equifund</strong> — by Rully Afrizal Alwin
-                </v-card-text>
-            </v-card>
+        <v-footer padless>
+            <v-col class="text-center" cols="12">
+                &copy;{{ new Date().getFullYear() }} — <strong>Equifund</strong> — by Rully Afrizal Alwin
+            </v-col>
         </v-footer>
     </v-app>
 </template>

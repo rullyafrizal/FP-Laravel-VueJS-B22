@@ -2132,7 +2132,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   data: function data() {
@@ -3277,7 +3276,10 @@ var render = function() {
                           [
                             _c(
                               "v-btn",
-                              { attrs: { block: "", color: "red", dark: "" } },
+                              {
+                                staticClass: "rounded-pill",
+                                attrs: { block: "", color: "red", dark: "" }
+                              },
                               [
                                 _c("v-icon", { attrs: { left: "" } }, [
                                   _vm._v("mdi-lock")
@@ -3353,7 +3355,7 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "mb-1",
+                          staticClass: "mb-1 rounded-pill",
                           attrs: { block: "", color: "primary" }
                         },
                         [
@@ -3415,7 +3417,7 @@ var render = function() {
       _vm.isHome
         ? _c(
             "v-app-bar",
-            { attrs: { app: "", color: "success", dark: "" } },
+            { attrs: { app: "", color: "indigo darken-4", dark: "" } },
             [
               _c("v-app-bar-nav-icon", {
                 on: {
@@ -3426,7 +3428,7 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _c("v-toolbar-title", [_vm._v("CrowdFunding Website")]),
+              _c("v-toolbar-title", [_c("strong", [_vm._v("Equifund")])]),
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
@@ -3461,7 +3463,7 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("v-text-field", {
-                staticClass: "mb-4",
+                staticClass: "mb-5 rounded-pill",
                 attrs: {
                   slot: "extension",
                   "hide-details": "",
@@ -3478,7 +3480,7 @@ var render = function() {
           )
         : _c(
             "v-app-bar",
-            { attrs: { app: "", color: "success", dark: "" } },
+            { attrs: { app: "", color: "indigo darken-4", dark: "" } },
             [
               _c(
                 "v-btn",
@@ -3494,6 +3496,8 @@ var render = function() {
                 [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
                 1
               ),
+              _vm._v(" "),
+              _c("v-toolbar-title", [_c("strong", [_vm._v("Equifund")])]),
               _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
@@ -3540,28 +3544,15 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-footer",
-        { attrs: { dark: "", padless: "" } },
+        { attrs: { padless: "" } },
         [
-          _c(
-            "v-card",
-            { staticClass: "flex", attrs: { flat: "", tile: "" } },
-            [
-              _c(
-                "v-card-text",
-                { staticClass: "py-4 white--text text-center" },
-                [
-                  _vm._v(
-                    "\n                ©" +
-                      _vm._s(new Date().getFullYear()) +
-                      " — "
-                  ),
-                  _c("strong", [_vm._v("Equifund")]),
-                  _vm._v(" — by Rully Afrizal Alwin\n            ")
-                ]
-              )
-            ],
-            1
-          )
+          _c("v-col", { staticClass: "text-center", attrs: { cols: "12" } }, [
+            _vm._v(
+              "\n            ©" + _vm._s(new Date().getFullYear()) + " — "
+            ),
+            _c("strong", [_vm._v("Equifund")]),
+            _vm._v(" — by Rully Afrizal Alwin\n        ")
+          ])
         ],
         1
       )
@@ -63861,6 +63852,12 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'blogs',
     component: function component() {
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
+    }
+  }, {
+    path: '/campaign/:id',
+    name: 'campaign',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
     }
   }, {
     path: '/campaigns',

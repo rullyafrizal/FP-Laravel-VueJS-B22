@@ -1,24 +1,22 @@
 <template>
-    <v-container class="ma-0 pa-0" grid-list-sm>
+    <v-container class="ma-0 pa-0 mx-auto" grid-list-sm>
         <v-subheader>
             All Campaigns
         </v-subheader>
         <v-layout wrap>
-            <v-flex v-for="(campaign) in campaigns" :key="`campaign-` + campaign.id" xs6>
-                <v-card :to="'/campaign/' + campaign.id">
-                    <v-img :src="campaign.image" class="white--text">
-                        <v-card-title class="fill-height align-end" v-text="campaign.title"></v-card-title>
-                    </v-img>
-                </v-card>
-            </v-flex>
+            <div v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id">
+                <campaign-item :campaign="campaign"/>
+            </div>
         </v-layout>
         <v-pagination v-model="page" @input="go" :length="lengthPage" :total-visible="6"></v-pagination>
     </v-container>
 </template>
 
 <script>
+import CampaignItem from "../components/CampaignItem";
 export default {
     name: "Campaigns",
+    components: {CampaignItem},
     data: () => ({
         campaigns: [],
         page: 0,
@@ -39,6 +37,9 @@ export default {
                 let{responses} = error
                 console.log(responses)
             })
+        },
+        progress(campaign){
+            return Math.round(campaign.collected / campaign.required * 100)
         }
     }
 }

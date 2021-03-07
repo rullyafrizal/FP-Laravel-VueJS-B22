@@ -57,6 +57,7 @@ class RegenerateOTPController extends Controller
                 'response_message' => 'OTP baru telah terkirim, silahkan cek email',
                 'data' => $data
             ]);
+
         } catch (QueryException $ex) {
             return response()->json([
                 'message' => "Failed $ex->errorInfo"

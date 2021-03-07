@@ -47,7 +47,7 @@
         </v-navigation-drawer>
 
         <!--Header-->
-        <v-app-bar app color="success" dark>
+        <v-app-bar app color="success" dark v-if="isHome">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
             <v-toolbar-title>CrowdFunding Website</v-toolbar-title>
@@ -69,9 +69,25 @@
             </v-text-field>
         </v-app-bar>
 
+        <v-app-bar app color="success" dark v-else>
+            <v-btn icon @click.stop="$router.go(-1)">
+                <v-icon>mdi-arrow-left-circle</v-icon>
+            </v-btn>
+
+            <v-spacer></v-spacer>
+
+            <v-btn icon>
+                <v-badge color="orange" overlap>
+                    <template v-slot:badge>
+                        <span>3</span>
+                    </template>
+                    <v-icon>mdi-cash-multiple</v-icon>
+                </v-badge>
+            </v-btn>
+        </v-app-bar>
+
         <!--content -->
         <v-main>
-
             <!-- Provides the application the proper gutter -->
             <v-container fluid>
 
@@ -110,7 +126,12 @@ export default {
             },
         ],
         guest: false,
-    })
+    }),
+    computed: {
+        isHome(){
+            return (this.$route.path === '/' || this.$route.path === '/home');
+        }
+    }
 }
 </script>
 

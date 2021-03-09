@@ -2161,10 +2161,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     Alert: _components_Alert_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Search: function Search() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
     },
     Login: function Login() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
     }
   },
   data: function data() {
@@ -2201,10 +2201,39 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   }),
-  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     setDialogStatus: 'dialog/setStatus',
-    setDialogComponent: 'dialog/setComponent'
-  }))
+    setDialogComponent: 'dialog/setComponent',
+    setAuth: 'auth/set',
+    setAlert: 'alert/set'
+  })), {}, {
+    logout: function logout() {
+      var _this = this;
+
+      var config = {
+        headers: {
+          'Authorization': 'Bearer ' + this.user.token
+        }
+      };
+      axios.post('/api/auth/logout', {}, config).then(function (response) {
+        _this.setAuth({});
+
+        _this.setAlert({
+          status: true,
+          color: 'success',
+          text: 'Successfully Logout'
+        });
+      })["catch"](function (error) {
+        var data = error.response.data;
+
+        _this.setAlert({
+          status: true,
+          color: 'error',
+          text: data.message
+        });
+      });
+    }
+  })
 });
 
 /***/ }),
@@ -3422,7 +3451,8 @@ var render = function() {
                               "v-btn",
                               {
                                 staticClass: "rounded-pill",
-                                attrs: { block: "", color: "red", dark: "" }
+                                attrs: { block: "", color: "red", dark: "" },
+                                on: { click: _vm.logout }
                               },
                               [
                                 _c("v-icon", { attrs: { left: "" } }, [
@@ -65416,19 +65446,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: '/donations',
     name: 'donations',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/Donations.vue */ "./resources/js/views/Donations.vue"));
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./views/Donations.vue */ "./resources/js/views/Donations.vue"));
     }
   }, {
     path: '/blogs',
     name: 'blogs',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
     }
   }, {
     path: '/campaign/:id',
     name: 'campaign',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
     }
   }, {
     path: '/campaigns',

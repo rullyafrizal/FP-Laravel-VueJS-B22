@@ -1,22 +1,40 @@
 <template>
     <!-- App.vue -->
     <v-app>
+    <!-- SnackBar -->
+    <alert/>
+
+<!--        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">-->
+<!--            <Search @closed="closeDialog"/>-->
+<!--        </v-dialog>-->
+
+        <keep-alive>
+            <v-dialog v-model="dialog" fullscreen hide-overlay persistent transition="dialog-bottom-transition">
+                <component :is="currentComponent" @closed="setDialogStatus"></component>
+            </v-dialog>
+        </keep-alive>
+
         <!--Sidebar -->
         <v-navigation-drawer app v-model="drawer">
             <v-list>
                 <v-list-item v-if="!guest">
                     <v-list-item-avatar>
-                        <v-img src="https://randomuser.me/api/portraits/men/78.jpg"></v-img>
+                        <v-img :src="user.user.photo"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>
-                            Rully Afrizal
+                            {{user.user.name}}
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
                 <div class="pa-2" v-if="guest">
-                    <v-btn block color="primary" class="mb-1 rounded-pill">
+
+                    <v-btn block color="primary" class="mb-1 rounded-pill" @click="setDialogComponent('Login')">
+                        <v-icon left>mdi-lock</v-icon>
+                        Login
+                    </v-btn>
+                    <v-btn block color="success" class="mb-1 rounded-pill">
                         <v-icon left>mdi-account</v-icon>
                         Register
                     </v-btn>
@@ -56,18 +74,20 @@
             <v-spacer></v-spacer>
 
             <v-btn icon>
-                <v-badge :content="count" :value="count" color="red" overlap>
+                <v-badge :content="transactions" :value="transactions" color="red" overlap>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
-
             </v-btn>
 
-            <v-text-field class="mb-5 rounded-pill" slot="extension" hide-details append-icon="mdi-microphone" flat label="Pencarian" prepend-inner-icon="mdi-magnify" solo-inverted>
-
+            <v-text-field @click="setDialogComponent('Search')" class="mb-5 rounded-pill"
+                          slot="extension" hide-details append-icon="mdi-microphone"
+                          flat label="Pencarian" prepend-inner-icon="mdi-magnify"
+                          solo-inverted>
             </v-text-field>
         </v-app-bar>
 
         <v-app-bar app color="indigo darken-4" dark v-else>
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-btn icon @click.stop="$router.go(-1)">
                 <v-icon>mdi-arrow-left-circle</v-icon>
             </v-btn>
@@ -76,7 +96,7 @@
             <v-spacer></v-spacer>
 
             <v-btn icon>
-                <v-badge :content="count" :value="count" color="red" overlap>
+                <v-badge :content="transactions" :value="transactions" color="red" overlap>
                     <v-icon>mdi-cash-multiple</v-icon>
                 </v-badge>
             </v-btn>
@@ -86,7 +106,6 @@
         <v-main>
             <!-- Provides the application the proper gutter -->
             <v-container fluid>
-
                 <!-- If using vue-router -->
                 <v-slide-y-transition>
                     <router-view></router-view>
@@ -103,8 +122,16 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from 'vuex'
+import Alert from './components/Alert.vue'
+
 export default {
     name: 'App',
+    components: {
+        Alert,
+        Search : () => import('./components/Search.vue'),
+        Login: () => import('./components/Login.vue')
+    },
     data: () => ({
         drawer: false,
         menus: [
@@ -119,16 +146,33 @@ export default {
                 route: '/campaigns'
             },
         ],
-        guest: false,
     }),
     computed: {
         isHome(){
             return (this.$route.path === '/' || this.$route.path === '/home');
         },
-        count(){
-            return this.$store.state.count
+        ...mapGetters({
+            'transactions' : 'transactions/transactions',
+            guest: 'auth/guest',
+            user: 'auth/user',
+            dialogStatus: 'dialog/status',
+            currentComponent: 'dialog/component'
+        }),
+        dialog: {
+            get(){
+                return this.dialogStatus
+            },
+            set(value){
+                this.setDialogStatus(value)
+            }
         }
     },
+    methods: {
+        ...mapActions({
+            setDialogStatus: 'dialog/setStatus',
+            setDialogComponent: 'dialog/setComponent'
+        })
+    }
 }
 
 </script>

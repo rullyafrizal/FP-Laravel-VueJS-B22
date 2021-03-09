@@ -3,12 +3,15 @@
         <v-subheader>
             All Campaigns
         </v-subheader>
+
         <v-layout wrap>
             <div v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id">
                 <campaign-item :campaign="campaign"/>
             </div>
         </v-layout>
+
         <v-pagination v-model="page" @input="go" :length="lengthPage" :total-visible="6"></v-pagination>
+
     </v-container>
 </template>
 
@@ -37,10 +40,10 @@ export default {
                 let{responses} = error
                 console.log(responses)
             })
-        },
-        progress(campaign){
-            return Math.round(campaign.collected / campaign.required * 100)
         }
+    },
+    computed: {
+
     }
 }
 </script>

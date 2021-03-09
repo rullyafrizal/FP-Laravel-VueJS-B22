@@ -22,15 +22,17 @@ class UpdateProfileController extends Controller
         ]);
 
         try {
-            $tujuan_upload = 'user_pp';
             $filePhoto = $request->file('photo');
             $nama_file = "pp_" . $request->user()->id . "." . $filePhoto->getClientOriginalExtension();
-            $filePhoto->move($tujuan_upload, $nama_file);
+            $folder = '/user_pp/';
+            $path_file = $folder . $nama_file;
+            $filePhoto->move(public_path($folder), $nama_file);
+
 
 
             $user = $request->user();
             $user->name = request('name');
-            $user->photo = $nama_file;
+            $user->photo = $path_file;
             $user->save();
 
             $data['profile'] = $user;

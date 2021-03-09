@@ -34,6 +34,13 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     progress: function progress() {
       return Math.round(this.campaign.collected / this.campaign.required * 100);
+    },
+    titleLimit: function titleLimit() {
+      if (this.campaign.title.length > 33) {
+        return this.campaign.title.substring(0, 33) + '...';
+      } else {
+        return this.campaign.title;
+      }
     }
   }
 });
@@ -50,6 +57,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CampaignItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/CampaignItem */ "./resources/js/components/CampaignItem.vue");
+//
+//
+//
 //
 //
 //
@@ -94,11 +104,9 @@ __webpack_require__.r(__webpack_exports__);
         var responses = error.responses;
         console.log(responses);
       });
-    },
-    progress: function progress(campaign) {
-      return Math.round(campaign.collected / campaign.required * 100);
     }
-  }
+  },
+  computed: {}
 });
 
 /***/ }),
@@ -160,7 +168,7 @@ var render = function() {
                 }),
                 _vm._v(" "),
                 _c("v-card-title", { staticClass: "subtitle-1" }, [
-                  _c("b", [_vm._v(_vm._s(_vm.campaign.title))])
+                  _c("strong", [_vm._v(_vm._s(_vm.titleLimit))])
                 ]),
                 _vm._v(" "),
                 _c(

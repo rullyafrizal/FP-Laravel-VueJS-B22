@@ -3,7 +3,7 @@
         <!--Template Campaigns-->
         <v-container class="ma-0 pa-0 mx-auto" grid-list-sm>
             <div class="text-right">
-                <v-btn small text to="/campaigns" class="blue--text" style="text-decoration: none;npm ">
+                <v-btn small text to="/campaigns" class="blue--text" style="text-decoration: none; ">
                     All Campaigns <v-icon>mdi-chevron-right</v-icon>
                 </v-btn>
             </div>

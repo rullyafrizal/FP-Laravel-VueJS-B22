@@ -35,20 +35,20 @@ class CampaignController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|max:35',
+            'title' => 'required|max:100',
             'description' => 'required|min:50|max:1000',
             'image' => 'required|mimes:jpg,jpeg,png',
             'address' => 'required',
             'phone' => 'required|max:12',
-            'collected' => 'required',
-            'required' => 'required'
+            'collected' => 'numeric',
+            'required' => 'required|numeric'
         ]);
 
         $campaign = Campaign::create([
             'title' => request('title'),
             'description' => request('description'),
             'address' => request('address'),
-            'collected' => request('collected'),
+            'collected' => 0,
             'required' => request('required'),
             'phone' => request('phone')
         ]);
@@ -95,6 +95,18 @@ class CampaignController extends Controller
         return response()->json([
            'response_code' => '00',
            'response_message' => 'Detail Campaign berhasil ditampilkan',
+           'data' => $data
+        ]);
+    }
+
+    public function search($keyword){
+        $campaigns = Campaign::select('*')->where('title', 'LIKE', '%'.$keyword.'%')->get();
+
+        $data['campaigns'] = $campaigns;
+
+        return response()->json([
+           'response_code' => '00',
+           'response_message' => 'Data pencarian campaign berhasil ditampilkan',
            'data' => $data
         ]);
     }

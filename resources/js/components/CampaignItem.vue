@@ -7,7 +7,7 @@
                 </template>
             </v-img>
 
-            <v-card-title class="subtitle-1"><b>{{campaign.title}}</b></v-card-title>
+            <v-card-title class="subtitle-1"><strong>{{titleLimit}}</strong></v-card-title>
             <v-progress-linear class="rounded-pill" color="indigo darken-4" height="15" :value="progress" striped><strong class="white--text">{{progress}}%</strong></v-progress-linear>
             <v-card-text>
                 <v-icon>mdi-cash</v-icon> &nbsp;
@@ -25,6 +25,13 @@
             progress(){
                 return Math.round(this.campaign.collected / this.campaign.required * 100)
             },
+            titleLimit(){
+                if(this.campaign.title.length > 33){
+                    return this.campaign.title.substring(0,33) + '...'
+                } else {
+                    return this.campaign.title
+                }
+            }
         }
 
     }

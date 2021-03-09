@@ -2,7 +2,7 @@
 
 Route::namespace('Auth')->prefix('auth')->group(function () {
     Route::post('/register', 'RegisterController');
-    Route::post('/login', 'LoginController')->middleware('emailVerified');
+    Route::post('/login', 'LoginController');//->middleware('emailVerified');
     Route::post('/logout', 'LogoutController');
     Route::post('/verification', 'VerificationController');
     Route::post('/regenerate-otp', 'RegenerateOTPController');
@@ -29,6 +29,7 @@ Route::group([
     Route::post('store', 'CampaignController@store');
     Route::get('/', 'CampaignController@index');
     Route::get('/{id}', 'CampaignController@detail');
+    Route::get('/search/{keyword}', 'CampaignController@search');
 });
 
 Route::group([

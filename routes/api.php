@@ -7,6 +7,7 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
     Route::post('/verification', 'VerificationController');
     Route::post('/regenerate-otp', 'RegenerateOTPController');
     Route::post('/update-password', 'UpdatePasswordController')->middleware('emailVerified');
+    Route::post('/check-token', 'CheckTokenController')->middleware('auth:api');
 });
 
 

@@ -27,6 +27,11 @@
                         Login
                         <v-icon right dark>mdi-lock-open</v-icon>
                     </v-btn>
+
+                    <v-btn color="red darken-1" @click="authProvider('google')" class="white--text">
+                        Login with Google
+                        <v-icon right dark>mdi-google</v-icon>
+                    </v-btn>
                 </div>
             </v-form>
         </v-container>
@@ -34,7 +39,7 @@
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex'
+import {mapGetters, mapActions} from 'vuex';
 export default {
     name: "Login",
     data(){
@@ -71,43 +76,56 @@ export default {
                 }
                 let url = '/api/auth/login'
                 axios.post(url, formData).then((response) => {
-                    let{data} = response.data
-                    this.setAuth(data)
+                    let{data} = response.data;
+                    this.setAuth(data);
                     if(this.currentUser.user.id.length > 0) {
                         this.setAlert({
                             status: true,
                             color: 'success',
                             text: 'Login Success'
-                        })
-                        this.close()
+                        });
+                        this.close();
                     } else {
                         this.setAlert({
                             status: true,
                             color: 'error',
                             text: 'Login Failed'
-                        })
+                        });
                     }
                 }).catch((error) => {
-                    let responses = error.response
+                    let responses = error.response;
                     if(responses.status === 401){
                         this.setAlert({
                             status: true,
                             text: responses.data.response_message,
                             color: 'error'
-                        })
+                        });
                     } else if (responses.status === 500){
                         this.setAlert({
                             status: true,
                             text: 'Silahkan Verifikasi Email Terlebih Dahulu',
                             color: 'error'
-                        })
+                        });
                     }
 
-                })
+                });
             }
         },
         close(){
-            this.$emit('closed', false)
+            this.$emit('closed', false);
+        },
+        authProvider(provider){
+            let url = '/api/auth/social/' + provider;
+            axios.get(url).then((response) => {
+                let data = response.data;
+                window.location.href = data.url;
+            }).catch((error) => {
+                this.setAlert({
+                    status: true,
+                    text: 'Login Failed',
+                    color: 'error'
+                });
+            });
         }
     }
 }

@@ -8,6 +8,10 @@ Route::namespace('Auth')->prefix('auth')->group(function () {
     Route::post('/regenerate-otp', 'RegenerateOTPController');
     Route::post('/update-password', 'UpdatePasswordController')->middleware('emailVerified');
     Route::post('/check-token', 'CheckTokenController')->middleware('auth:api');
+
+    //Socialite
+    Route::get('/social/{provider}', 'SocialiteController@redirectToProvider');
+    Route::get('/social/{provider}/callback', 'SocialiteController@handleProviderCallback');
 });
 
 

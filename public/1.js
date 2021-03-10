@@ -28,9 +28,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "campaign-item",
   props: ['campaign'],
+  data: function data() {
+    return {
+      isActive: false,
+      overlay: false
+    };
+  },
   computed: {
     progress: function progress() {
       return Math.round(this.campaign.collected / this.campaign.required * 100);
@@ -167,31 +174,42 @@ var render = function() {
                 attrs: {
                   to: "/campaign/" + _vm.campaign.id,
                   elevation: hover ? 15 : 2,
-                  "max-width": "370"
+                  "max-width": "372"
                 }
               },
               [
-                _c("v-img", {
-                  staticClass: "rounded-lg",
-                  attrs: { src: _vm.campaign.image, "max-height": "200px" },
-                  scopedSlots: _vm._u(
-                    [
-                      {
-                        key: "placeholder",
-                        fn: function() {
-                          return [
-                            _c("v-skeleton-loader", {
-                              attrs: { type: "image" }
-                            })
-                          ]
-                        },
-                        proxy: true
-                      }
-                    ],
-                    null,
-                    true
-                  )
-                }),
+                _c(
+                  "v-img",
+                  {
+                    staticClass: "rounded-lg",
+                    attrs: { src: _vm.campaign.image, "max-height": "200px" },
+                    scopedSlots: _vm._u(
+                      [
+                        {
+                          key: "placeholder",
+                          fn: function() {
+                            return [
+                              _c("v-skeleton-loader", {
+                                attrs: { type: "image" }
+                              })
+                            ]
+                          },
+                          proxy: true
+                        }
+                      ],
+                      null,
+                      true
+                    )
+                  },
+                  [
+                    _vm.progress >= 100
+                      ? _c("v-overlay", { attrs: { absolute: "" } }, [
+                          _c("h4", [_vm._v("Donasi Terpenuhi")])
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c("v-card-title", { staticClass: "subtitle-1" }, [
                   _c("strong", [_vm._v(_vm._s(_vm.titleLimit))])

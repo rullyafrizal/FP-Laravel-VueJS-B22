@@ -37,7 +37,7 @@ class CampaignController extends Controller
         $this->validate($request, [
             'title' => 'required|max:100',
             'description' => 'required|min:50|max:1000',
-            'image' => 'required|mimes:jpg,jpeg,png',
+            'image' => 'required|mimes:jpg,jpeg,png|max:5000',
             'address' => 'required',
             'phone' => 'required|max:12',
             'collected' => 'numeric',

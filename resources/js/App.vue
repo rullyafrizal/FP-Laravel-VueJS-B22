@@ -30,11 +30,11 @@
 
                 <div class="pa-2" v-if="guest">
 
-                    <v-btn block color="primary" class="mb-1 rounded-pill" @click="setDialogComponent('Login')">
+                    <v-btn block color="primary" class="mb-2 rounded-pill" @click="setDialogComponent('Login')">
                         <v-icon left>mdi-lock</v-icon>
                         Login
                     </v-btn>
-                    <v-btn block color="success" class="mb-1 rounded-pill">
+                    <v-btn block color="success" class="rounded-pill">
                         <v-icon left>mdi-account</v-icon>
                         Register
                     </v-btn>
@@ -65,9 +65,11 @@
         </v-navigation-drawer>
 
         <!--Header-->
-        <v-app-bar app color="indigo darken-4" dark v-if="isHome">
+        <v-app-bar app color="indigo darken-4" dark>
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
+            <v-btn v-if="!isHome" icon @click.stop="$router.go(-1)">
+                <v-icon>mdi-arrow-left-circle</v-icon>
+            </v-btn>
             <v-toolbar-title><strong>Equifund</strong></v-toolbar-title>
 
         <!--Pemisah Konten-->
@@ -84,22 +86,6 @@
                           flat label="Pencarian" prepend-inner-icon="mdi-magnify"
                           solo-inverted>
             </v-text-field>
-        </v-app-bar>
-
-        <v-app-bar app color="indigo darken-4" dark v-else>
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-btn icon @click.stop="$router.go(-1)">
-                <v-icon>mdi-arrow-left-circle</v-icon>
-            </v-btn>
-            <v-toolbar-title><strong>Equifund</strong></v-toolbar-title>
-
-            <v-spacer></v-spacer>
-
-            <v-btn icon>
-                <v-badge :content="transactions" :value="transactions" color="red" overlap>
-                    <v-icon>mdi-cash-multiple</v-icon>
-                </v-badge>
-            </v-btn>
         </v-app-bar>
 
         <!--content -->

@@ -2140,20 +2140,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3636,7 +3622,7 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "mb-1 rounded-pill",
+                          staticClass: "mb-2 rounded-pill",
                           attrs: { block: "", color: "primary" },
                           on: {
                             click: function($event) {
@@ -3658,7 +3644,7 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "mb-1 rounded-pill",
+                          staticClass: "rounded-pill",
                           attrs: { block: "", color: "success" }
                         },
                         [
@@ -3717,80 +3703,21 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _vm.isHome
-        ? _c(
-            "v-app-bar",
-            { attrs: { app: "", color: "indigo darken-4", dark: "" } },
-            [
-              _c("v-app-bar-nav-icon", {
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                    _vm.drawer = !_vm.drawer
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("v-toolbar-title", [_c("strong", [_vm._v("Equifund")])]),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                { attrs: { icon: "" } },
-                [
-                  _c(
-                    "v-badge",
-                    {
-                      attrs: {
-                        content: _vm.transactions,
-                        value: _vm.transactions,
-                        color: "red",
-                        overlap: ""
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-cash-multiple")])],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("v-text-field", {
-                staticClass: "mb-5 rounded-pill",
-                attrs: {
-                  slot: "extension",
-                  "hide-details": "",
-                  "append-icon": "mdi-microphone",
-                  flat: "",
-                  label: "Pencarian",
-                  "prepend-inner-icon": "mdi-magnify",
-                  "solo-inverted": ""
-                },
-                on: {
-                  click: function($event) {
-                    return _vm.setDialogComponent("Search")
-                  }
-                },
-                slot: "extension"
-              })
-            ],
-            1
-          )
-        : _c(
-            "v-app-bar",
-            { attrs: { app: "", color: "indigo darken-4", dark: "" } },
-            [
-              _c("v-app-bar-nav-icon", {
-                on: {
-                  click: function($event) {
-                    $event.stopPropagation()
-                    _vm.drawer = !_vm.drawer
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c(
+      _c(
+        "v-app-bar",
+        { attrs: { app: "", color: "indigo darken-4", dark: "" } },
+        [
+          _c("v-app-bar-nav-icon", {
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                _vm.drawer = !_vm.drawer
+              }
+            }
+          }),
+          _vm._v(" "),
+          !_vm.isHome
+            ? _c(
                 "v-btn",
                 {
                   attrs: { icon: "" },
@@ -3803,35 +3730,55 @@ var render = function() {
                 },
                 [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
                 1
-              ),
-              _vm._v(" "),
-              _c("v-toolbar-title", [_c("strong", [_vm._v("Equifund")])]),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _vm._v(" "),
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c("v-toolbar-title", [_c("strong", [_vm._v("Equifund")])]),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            { attrs: { icon: "" } },
+            [
               _c(
-                "v-btn",
-                { attrs: { icon: "" } },
-                [
-                  _c(
-                    "v-badge",
-                    {
-                      attrs: {
-                        content: _vm.transactions,
-                        value: _vm.transactions,
-                        color: "red",
-                        overlap: ""
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-cash-multiple")])],
-                    1
-                  )
-                ],
+                "v-badge",
+                {
+                  attrs: {
+                    content: _vm.transactions,
+                    value: _vm.transactions,
+                    color: "red",
+                    overlap: ""
+                  }
+                },
+                [_c("v-icon", [_vm._v("mdi-cash-multiple")])],
                 1
               )
             ],
             1
           ),
+          _vm._v(" "),
+          _c("v-text-field", {
+            staticClass: "mb-5 rounded-pill",
+            attrs: {
+              slot: "extension",
+              "hide-details": "",
+              "append-icon": "mdi-microphone",
+              flat: "",
+              label: "Pencarian",
+              "prepend-inner-icon": "mdi-magnify",
+              "solo-inverted": ""
+            },
+            on: {
+              click: function($event) {
+                return _vm.setDialogComponent("Search")
+              }
+            },
+            slot: "extension"
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-main",

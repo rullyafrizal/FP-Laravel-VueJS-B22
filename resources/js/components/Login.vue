@@ -7,8 +7,6 @@
             <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
 
-        <v-divider></v-divider>
-
         <v-container fluid>
             <v-form ref="form" v-model="valid" lazy-validation>
                 <v-text-field v-model="email" :rules="emailRules"

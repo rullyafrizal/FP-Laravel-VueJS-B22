@@ -35,6 +35,13 @@ class RegenerateOTPController extends Controller
                 ], 200);
             }
 
+            if($user->email_verified_at !== null){
+                return response()->json([
+                   'response_code' => '01',
+                   'response_message' => 'Gagal, Email Sudah Terverifikasi'
+                ]);
+            }
+
             $data['user'] = $user;
 
             $user_id = User::with('otp_code')->where('email', request('email'))

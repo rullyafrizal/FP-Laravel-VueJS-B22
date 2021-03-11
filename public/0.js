@@ -147,7 +147,7 @@ var render = function() {
                 staticStyle: { "text-decoration": "none" },
                 attrs: {
                   to: "/campaign/" + _vm.campaign.id,
-                  elevation: hover ? 15 : 2,
+                  elevation: hover ? 12 : 2,
                   "max-width": "372"
                 }
               },

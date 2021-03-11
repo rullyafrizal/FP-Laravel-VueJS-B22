@@ -60,7 +60,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       valid: true,
-      email: 'example@example.com',
+      email: '',
       emailRules: [function (v) {
         return !!v || 'Email is Required';
       }, function (v) {
@@ -99,11 +99,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           if (_this.currentUser.user.id.length > 0) {
             _this.setAlert({
               status: true,
-              color: 'success',
+              color: 'primary',
               text: 'Login Success'
             });
 
             _this.close();
+
+            window.location.href = '/';
           } else {
             _this.setAlert({
               status: true,

@@ -17,7 +17,7 @@
 
 //Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth', 'emailVerified'])->group(function () {
     Route::get('/route-1', 'PageController@route1');
@@ -27,9 +27,10 @@ Route::middleware(['auth', 'emailVerified', 'admin'])->group(function () {
     Route::get('/route-2', 'PageController@route2');
 });
 
-Route::get('/testing', function () {
-//    return view('send_email_user_registered');
-});
+//Route::get('/testing', function () {
+////    return view('send_email_user_registered');
+//});
 
 Route::view('/{any?}', 'app')->where('any', '.*');
+
 

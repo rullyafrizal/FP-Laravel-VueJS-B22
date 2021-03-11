@@ -34,6 +34,21 @@ const router = new Router({
             component: () => import('./views/Campaigns.vue')
         },
         {
+          path: '/verification',
+          name: 'verification',
+          component: () => import('./views/Verification.vue')
+        },
+        {
+            path: '/update-password',
+            name: 'update-password',
+            component: () => import('./views/UpdatePassword.vue')
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: () => import('./views/Profile.vue')
+        },
+        {
           path: '/auth/social/:provider/callback',
           name: 'social',
           component: () => import('./views/Social.vue')

@@ -1,8 +1,8 @@
 <template>
-    <v-snackbar v-model="alert" color="color" buttom timeout="5000" elevation="24" multi-line outlined dark>
+    <v-snackbar v-model="alert" :color="color" buttom timeout="5000" elevation="24" multi-line>
         {{text}}
         <template v-slot:action="{attrs}">
-            <v-btn color="white" text v-bind="attrs" @click="close">
+            <v-btn text v-bind="attrs" @click="close">
                 <v-icon>mdi-close</v-icon>
             </v-btn>
         </template>

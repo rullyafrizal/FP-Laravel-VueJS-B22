@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Please Wait....</h2>
+        <h2>Please Wait.....</h2>
     </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
                 if(this.user.user.id.length > 0){
                     this.setAlert({
                         status: true,
-                        color: 'success',
+                        color: 'primary',
                         text: 'Login Success'
                     });
                     this.setDialogStatus(false);

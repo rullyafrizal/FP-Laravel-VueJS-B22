@@ -34,7 +34,7 @@ class UserRegisterMail extends Mailable
      */
     public function build()
     {
-        return $this->from('example@example.com')
+        return $this->from('equifund@gmail.com')
                     ->view('send_email_user_registered')
                     ->with([
                         'name' => $this->user->name,

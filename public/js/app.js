@@ -2140,6 +2140,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2147,10 +2148,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     Alert: _components_Alert_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Search: function Search() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
     },
     Login: function Login() {
       return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
+    },
+    Register: function Register() {
+      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/Register.vue */ "./resources/js/components/Register.vue"));
+    },
+    UpdateProfile: function UpdateProfile() {
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/UpdateProfile.vue */ "./resources/js/components/UpdateProfile.vue"));
     }
   },
   data: function data() {
@@ -2170,6 +2177,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   computed: _objectSpread(_objectSpread({
     isHome: function isHome() {
       return this.$route.path === '/' || this.$route.path === '/home';
+    },
+    isAuth: function isAuth() {
+      return this.$route.path === '/verification' || this.$route.path === '/update-password';
+    },
+    isProfile: function isProfile() {
+      return this.$route.path === '/profile';
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     'transactions': 'transactions/transactions',
@@ -3505,8 +3518,7 @@ var render = function() {
             "v-dialog",
             {
               attrs: {
-                fullscreen: "",
-                "hide-overlay": "",
+                "max-width": "600px",
                 persistent: "",
                 transition: "dialog-bottom-transition"
               },
@@ -3557,7 +3569,7 @@ var render = function() {
                                   _vm._v("mdi-lock")
                                 ]),
                                 _vm._v(
-                                  "\n                            Logout\n                        "
+                                  "\n                        Logout\n                    "
                                 )
                               ],
                               1
@@ -3589,6 +3601,10 @@ var render = function() {
               !_vm.guest
                 ? _c(
                     "v-list-item",
+                    {
+                      staticStyle: { "text-decoration": "none" },
+                      attrs: { to: "/profile" }
+                    },
                     [
                       _c(
                         "v-list-item-avatar",
@@ -3599,13 +3615,17 @@ var render = function() {
                       _c(
                         "v-list-item-content",
                         [
-                          _c("v-list-item-title", [
-                            _vm._v(
-                              "\n                            " +
-                                _vm._s(_vm.user.user.name) +
-                                "\n                        "
-                            )
-                          ])
+                          _c(
+                            "v-list-item-title",
+                            [
+                              _c("strong", [
+                                _vm._v(_vm._s(_vm.user.user.name))
+                              ]),
+                              _vm._v(" "),
+                              _c("v-icon", [_vm._v("mdi-arrow-right-circle")])
+                            ],
+                            1
+                          )
                         ],
                         1
                       )
@@ -3622,8 +3642,8 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "mb-2 rounded-pill",
-                          attrs: { block: "", color: "primary" },
+                          staticClass: "white--text mb-2 rounded-pill",
+                          attrs: { block: "", color: "indigo darken-4" },
                           on: {
                             click: function($event) {
                               return _vm.setDialogComponent("Login")
@@ -3635,7 +3655,7 @@ var render = function() {
                             _vm._v("mdi-lock")
                           ]),
                           _vm._v(
-                            "\n                        Login\n                    "
+                            "\n                    Login\n                "
                           )
                         ],
                         1
@@ -3644,15 +3664,20 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "rounded-pill",
-                          attrs: { block: "", color: "success" }
+                          staticClass: "white--text rounded-pill",
+                          attrs: { block: "", color: "red darken-2" },
+                          on: {
+                            click: function($event) {
+                              return _vm.setDialogComponent("Register")
+                            }
+                          }
                         },
                         [
                           _c("v-icon", { attrs: { left: "" } }, [
                             _vm._v("mdi-account")
                           ]),
                           _vm._v(
-                            "\n                        Register\n                    "
+                            "\n                    Register\n                "
                           )
                         ],
                         1
@@ -3684,9 +3709,9 @@ var render = function() {
                       [
                         _c("v-list-item-title", [
                           _vm._v(
-                            "\n                            " +
+                            "\n                        " +
                               _vm._s(item.title) +
-                              "\n                        "
+                              "\n                    "
                           )
                         ])
                       ],
@@ -3703,82 +3728,126 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "v-app-bar",
-        { attrs: { app: "", color: "indigo darken-4", dark: "" } },
-        [
-          _c("v-app-bar-nav-icon", {
-            on: {
-              click: function($event) {
-                $event.stopPropagation()
-                _vm.drawer = !_vm.drawer
-              }
-            }
-          }),
-          _vm._v(" "),
-          !_vm.isHome
-            ? _c(
-                "v-btn",
+      !_vm.isProfile
+        ? _c(
+            "v-app-bar",
+            { attrs: { app: "", color: "indigo darken-4", dark: "" } },
+            [
+              _c("v-app-bar-nav-icon", {
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    _vm.drawer = !_vm.drawer
+                  }
+                }
+              }),
+              _vm._v(" "),
+              !_vm.isHome
+                ? _c(
+                    "v-btn",
+                    {
+                      attrs: { icon: "" },
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          return _vm.$router.go(-1)
+                        }
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+                    1
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _c(
+                "v-toolbar-title",
                 {
-                  attrs: { icon: "" },
+                  staticStyle: { cursor: "pointer" },
                   on: {
                     click: function($event) {
-                      $event.stopPropagation()
-                      return _vm.$router.go(-1)
+                      return _vm.$router.push("/")
                     }
                   }
                 },
-                [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("v-toolbar-title", [_c("strong", [_vm._v("Equifund")])]),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { icon: "" } },
-            [
+                [_c("strong", [_vm._v("Equifund")])]
+              ),
+              _vm._v(" "),
+              _c("v-spacer"),
+              _vm._v(" "),
               _c(
-                "v-badge",
-                {
-                  attrs: {
-                    content: _vm.transactions,
-                    value: _vm.transactions,
-                    color: "red",
-                    overlap: ""
+                "v-btn",
+                { attrs: { icon: "" } },
+                [
+                  _c(
+                    "v-badge",
+                    {
+                      attrs: {
+                        content: _vm.transactions,
+                        value: _vm.transactions,
+                        color: "red",
+                        overlap: ""
+                      }
+                    },
+                    [_c("v-icon", [_vm._v("mdi-cash-multiple")])],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-text-field", {
+                staticClass: "mb-5 rounded-pill",
+                attrs: {
+                  slot: "extension",
+                  "hide-details": "",
+                  "append-icon": "mdi-microphone",
+                  flat: "",
+                  label: "Pencarian",
+                  "prepend-inner-icon": "mdi-magnify",
+                  "solo-inverted": ""
+                },
+                on: {
+                  click: function($event) {
+                    return _vm.setDialogComponent("Search")
                   }
                 },
-                [_c("v-icon", [_vm._v("mdi-cash-multiple")])],
-                1
+                slot: "extension"
+              })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isProfile
+        ? _c(
+            "v-app-bar",
+            { attrs: { app: "", color: "indigo darken-4", dark: "" } },
+            [
+              _c("v-app-bar-nav-icon", {
+                on: {
+                  click: function($event) {
+                    $event.stopPropagation()
+                    _vm.drawer = !_vm.drawer
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "v-toolbar-title",
+                {
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.$router.push("/")
+                    }
+                  }
+                },
+                [_c("strong", [_vm._v("Equifund")])]
               )
             ],
             1
-          ),
-          _vm._v(" "),
-          _c("v-text-field", {
-            staticClass: "mb-5 rounded-pill",
-            attrs: {
-              slot: "extension",
-              "hide-details": "",
-              "append-icon": "mdi-microphone",
-              flat: "",
-              label: "Pencarian",
-              "prepend-inner-icon": "mdi-magnify",
-              "solo-inverted": ""
-            },
-            on: {
-              click: function($event) {
-                return _vm.setDialogComponent("Search")
-              }
-            },
-            slot: "extension"
-          })
-        ],
-        1
-      ),
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "v-main",
@@ -3799,10 +3868,10 @@ var render = function() {
         [
           _c("v-col", { staticClass: "text-center", attrs: { cols: "12" } }, [
             _vm._v(
-              "\n                ©" + _vm._s(new Date().getFullYear()) + " — "
+              "\n            ©" + _vm._s(new Date().getFullYear()) + " — "
             ),
             _c("strong", [_vm._v("Equifund")]),
-            _vm._v(" — by Rully Afrizal Alwin\n            ")
+            _vm._v(" — by Rully Afrizal Alwin\n        ")
           ])
         ],
         1
@@ -3837,13 +3906,11 @@ var render = function() {
     "v-snackbar",
     {
       attrs: {
-        color: "color",
+        color: _vm.color,
         buttom: "",
         timeout: "5000",
         elevation: "24",
-        "multi-line": "",
-        outlined: "",
-        dark: ""
+        "multi-line": ""
       },
       scopedSlots: _vm._u([
         {
@@ -3854,10 +3921,7 @@ var render = function() {
               _c(
                 "v-btn",
                 _vm._b(
-                  {
-                    attrs: { color: "white", text: "" },
-                    on: { click: _vm.close }
-                  },
+                  { attrs: { text: "" }, on: { click: _vm.close } },
                   "v-btn",
                   attrs,
                   false
@@ -65934,19 +65998,19 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     path: '/donations',
     name: 'donations',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./views/Donations.vue */ "./resources/js/views/Donations.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/Donations.vue */ "./resources/js/views/Donations.vue"));
     }
   }, {
     path: '/blogs',
     name: 'blogs',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
     }
   }, {
     path: '/campaign/:id',
     name: 'campaign',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
+      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
     }
   }, {
     path: '/campaigns',
@@ -65955,10 +66019,28 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Campaigns.vue */ "./resources/js/views/Campaigns.vue"));
     }
   }, {
+    path: '/verification',
+    name: 'verification',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./views/Verification.vue */ "./resources/js/views/Verification.vue"));
+    }
+  }, {
+    path: '/update-password',
+    name: 'update-password',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./views/UpdatePassword.vue */ "./resources/js/views/UpdatePassword.vue"));
+    }
+  }, {
+    path: '/profile',
+    name: 'profile',
+    component: function component() {
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/Profile.vue */ "./resources/js/views/Profile.vue"));
+    }
+  }, {
     path: '/auth/social/:provider/callback',
     name: 'social',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Social.vue */ "./resources/js/views/Social.vue"));
+      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./views/Social.vue */ "./resources/js/views/Social.vue"));
     }
   }, {
     path: '*',

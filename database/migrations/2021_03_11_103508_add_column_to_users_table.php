@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPhotoToUsersTable extends Migration
+class AddColumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,9 @@ class AddPhotoToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('photo')->nullable(true)->after('email')->default('/user_pp/pp_default.png');
+            $table->string('address')->after('email')->nullable();
+            $table->string('phone', 15)->after('address')->nullable();
+            $table->string('occupation', 50)->after('phone')->nullable();
         });
     }
 
@@ -26,7 +28,7 @@ class AddPhotoToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['photo']);
+            //
         });
     }
 }

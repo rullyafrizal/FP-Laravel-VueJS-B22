@@ -1,6 +1,6 @@
 <template>
         <v-hover v-slot:default="{ hover }">
-            <v-card :to="'/campaign/' + campaign.id" :elevation="hover ? 15 : 2" max-width="372" class="pa-3 mb-4 mr-5 rounded-lg" style="text-decoration: none;">
+            <v-card :to="'/campaign/' + campaign.id" :elevation="hover ? 12 : 2" max-width="372" class="pa-3 mb-4 mr-5 rounded-lg" style="text-decoration: none;">
                     <v-img :src="campaign.image" max-height="200px" class="rounded-lg">
                         <v-overlay v-if="progress >= 100" absolute><h4>Donasi Terpenuhi</h4></v-overlay>
                         <template v-slot:placeholder>

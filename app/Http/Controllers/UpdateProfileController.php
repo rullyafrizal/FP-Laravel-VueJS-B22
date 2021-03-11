@@ -18,7 +18,10 @@ class UpdateProfileController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string',
-            'photo' => 'required|file|image|mimes:jpeg,png,jpg|max:2048'
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'address' => 'required',
+            'occupation' => 'required',
+            'phone' => 'required'
         ]);
 
         try {
@@ -32,6 +35,9 @@ class UpdateProfileController extends Controller
 
             $user = $request->user();
             $user->name = request('name');
+            $user->address = request('address');
+            $user->occupation = request('occupation');
+            $user->phone = request('phone');
             $user->photo = $path_file;
             $user->save();
 

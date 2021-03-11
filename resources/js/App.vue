@@ -4,12 +4,8 @@
     <!-- SnackBar -->
     <alert/>
 
-<!--        <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">-->
-<!--            <Search @closed="closeDialog"/>-->
-<!--        </v-dialog>-->
-
         <keep-alive>
-            <v-dialog v-model="dialog" fullscreen hide-overlay persistent transition="dialog-bottom-transition">
+            <v-dialog v-model="dialog" max-width="600px" persistent transition="dialog-bottom-transition">
                 <component :is="currentComponent" @closed="setDialogStatus"></component>
             </v-dialog>
         </keep-alive>
@@ -17,24 +13,25 @@
         <!--Sidebar -->
         <v-navigation-drawer app v-model="drawer">
             <v-list>
-                <v-list-item v-if="!guest">
+                <v-list-item v-if="!guest" to="/profile" style="text-decoration: none;">
                     <v-list-item-avatar>
                         <v-img :src="user.user.photo"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>
-                            {{user.user.name}}
+                            <strong>{{user.user.name}}</strong>
+                            <v-icon>mdi-arrow-right-circle</v-icon>
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
 
                 <div class="pa-2" v-if="guest">
 
-                    <v-btn block color="primary" class="mb-2 rounded-pill" @click="setDialogComponent('Login')">
+                    <v-btn block color="indigo darken-4" class="white--text mb-2 rounded-pill" @click="setDialogComponent('Login')">
                         <v-icon left>mdi-lock</v-icon>
                         Login
                     </v-btn>
-                    <v-btn block color="success" class="rounded-pill">
+                    <v-btn block color="red darken-2" class="white--text rounded-pill" @click="setDialogComponent('Register')">
                         <v-icon left>mdi-account</v-icon>
                         Register
                     </v-btn>
@@ -65,12 +62,12 @@
         </v-navigation-drawer>
 
         <!--Header-->
-        <v-app-bar app color="indigo darken-4" dark>
+        <v-app-bar app color="indigo darken-4" dark v-if="!isProfile">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-btn v-if="!isHome" icon @click.stop="$router.go(-1)">
                 <v-icon>mdi-arrow-left-circle</v-icon>
             </v-btn>
-            <v-toolbar-title><strong>Equifund</strong></v-toolbar-title>
+            <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;"><strong>Equifund</strong></v-toolbar-title>
 
         <!--Pemisah Konten-->
             <v-spacer></v-spacer>
@@ -86,6 +83,10 @@
                           flat label="Pencarian" prepend-inner-icon="mdi-magnify"
                           solo-inverted>
             </v-text-field>
+        </v-app-bar>
+        <v-app-bar app color="indigo darken-4" dark v-if="isProfile">
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;"><strong>Equifund</strong></v-toolbar-title>
         </v-app-bar>
 
         <!--content -->
@@ -116,7 +117,9 @@ export default {
     components: {
         Alert,
         Search : () => import('./components/Search.vue'),
-        Login: () => import('./components/Login.vue')
+        Login: () => import('./components/Login.vue'),
+        Register: () => import('./components/Register.vue'),
+        UpdateProfile : () => import('./components/UpdateProfile.vue')
     },
     data: () => ({
         drawer: false,
@@ -136,6 +139,12 @@ export default {
     computed: {
         isHome(){
             return (this.$route.path === '/' || this.$route.path === '/home');
+        },
+        isAuth(){
+            return (this.$route.path === '/verification' || this.$route.path === '/update-password')
+        },
+        isProfile(){
+            return (this.$route.path === '/profile')
         },
         ...mapGetters({
             'transactions' : 'transactions/transactions',

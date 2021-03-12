@@ -2,7 +2,7 @@
 
 Route::namespace('Auth')->prefix('auth')->group(function () {
     Route::post('/register', 'RegisterController');
-    Route::post('/login', 'LoginController');//->middleware('emailVerified');
+    Route::post('/login', 'LoginController')->middleware('emailVerified');
     Route::post('/logout', 'LogoutController')->middleware('auth:api');
     Route::post('/verification', 'VerificationController');
     Route::post('/regenerate-otp', 'RegenerateOTPController');

@@ -39,14 +39,12 @@ const router = new Router({
           component: () => import('./views/Verification.vue')
         },
         {
-            path: '/update-password',
-            name: 'update-password',
-            component: () => import('./views/UpdatePassword.vue')
-        },
-        {
             path: '/profile',
             name: 'profile',
-            component: () => import('./views/Profile.vue')
+            component: () => import('./views/Profile.vue'),
+            meta: {
+                requiresAuth: true
+            }
         },
         {
           path: '/auth/social/:provider/callback',
@@ -60,5 +58,19 @@ const router = new Router({
 
     ]
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(route => route.meta.requiresAuth)) {
+        let auth = JSON.parse(localStorage.getItem('equifund')).auth
+        if (auth.user.token) {
+            next();
+        } else {
+            alert('Access Restricted')
+            next({ path: '/' });
+        }
+    }
+    next();
+});
+
 
 export default router;

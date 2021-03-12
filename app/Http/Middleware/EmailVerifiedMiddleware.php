@@ -18,12 +18,18 @@ class EmailVerifiedMiddleware
     public function handle($request, Closure $next)
     {
         $user = User::where('email', request('email'))->first();
+        if(!$user){
+            return response()->json([
+                'response_code' => '01',
+                'response_message' => 'User Tidak Ditemukan'
+            ], 401);
+        }
         if($user->email_verified_at !== null){
             return $next($request);
         }
         return response()->json([
             'response_code' => '01',
             'response_message' => 'Email belum terverifikasi, silahkan verifikasi terlebih dahulu'
-        ]);
+        ], 401);
     }
 }

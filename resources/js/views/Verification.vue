@@ -27,7 +27,6 @@
                         <v-btn color="red darken-2" class="white--text" @click="setDialogComponent('RegenerateOTP')">
                             Regenerate OTP
                         </v-btn>
-
                     </div>
                 </v-form>
             </v-container>
@@ -41,7 +40,8 @@ import {mapActions, mapGetters} from "vuex";
 export default {
     name: "Verification",
     components: {
-        RegenerateOTP : () => import('../components/RegenerateOTP.vue')
+        RegenerateOTP : () => import('../components/RegenerateOTP.vue'),
+        UpdatePassword: () => import('../components/UpdatePassword.vue'),
     },
     data(){
         return{
@@ -73,6 +73,7 @@ export default {
             setAlert: 'alert/set',
             setDialogStatus: 'dialog/setStatus',
             setDialogComponent: 'dialog/setComponent',
+            setAuth: 'auth/set',
         }),
         submit(){
             if(this.$refs.form.validate()){
@@ -94,7 +95,7 @@ export default {
                             color: 'primary',
                             text: 'Verifikasi Berhasil, silahkan update password anda'
                         });
-                        window.location.href = '/update-password'
+                        this.setDialogComponent('UpdatePassword')
                     }
 
                 }).catch((error) => {

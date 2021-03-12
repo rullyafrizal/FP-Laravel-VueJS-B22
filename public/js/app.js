@@ -2141,6 +2141,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2148,16 +2154,22 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   components: {
     Alert: _components_Alert_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     Search: function Search() {
-      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
+      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./components/Search.vue */ "./resources/js/components/Search.vue"));
     },
     Login: function Login() {
-      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
+      return __webpack_require__.e(/*! import() */ 6).then(__webpack_require__.bind(null, /*! ./components/Login.vue */ "./resources/js/components/Login.vue"));
     },
     Register: function Register() {
-      return __webpack_require__.e(/*! import() */ 5).then(__webpack_require__.bind(null, /*! ./components/Register.vue */ "./resources/js/components/Register.vue"));
+      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/Register.vue */ "./resources/js/components/Register.vue"));
     },
     UpdateProfile: function UpdateProfile() {
-      return __webpack_require__.e(/*! import() */ 7).then(__webpack_require__.bind(null, /*! ./components/UpdateProfile.vue */ "./resources/js/components/UpdateProfile.vue"));
+      return __webpack_require__.e(/*! import() */ 2).then(__webpack_require__.bind(null, /*! ./components/UpdateProfile.vue */ "./resources/js/components/UpdateProfile.vue"));
+    },
+    RegenerateOTP: function RegenerateOTP() {
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./components/RegenerateOTP.vue */ "./resources/js/components/RegenerateOTP.vue"));
+    },
+    UpdatePassword: function UpdatePassword() {
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./components/UpdatePassword.vue */ "./resources/js/components/UpdatePassword.vue"));
     }
   },
   data: function data() {
@@ -2171,7 +2183,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         title: 'Campaigns',
         icon: 'mdi-hand-heart',
         route: '/campaigns'
-      }]
+      }],
+      profile: {}
     };
   },
   computed: _objectSpread(_objectSpread({
@@ -2223,6 +2236,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           color: 'success',
           text: 'Successfully Logout'
         });
+
+        _this.$router.push({
+          name: 'home'
+        });
       })["catch"](function (error) {
         var data = error.response.data;
 
@@ -2237,6 +2254,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     if (this.user) {
       this.checkToken(this.user);
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    if (this.user.token.length > 0) {
+      var url = '/api/profile/get-profile';
+      axios.get(url, {
+        headers: {
+          'Authorization': "token ".concat(this.user.token)
+        }
+      }).then(function (response) {
+        var data = response.data.data;
+        _this2.profile = data.profile;
+      })["catch"](function (error) {
+        var responses = error.responses;
+        console.log(responses);
+      });
     }
   }
 });
@@ -3608,7 +3643,7 @@ var render = function() {
                     [
                       _c(
                         "v-list-item-avatar",
-                        [_c("v-img", { attrs: { src: _vm.user.user.photo } })],
+                        [_c("v-img", { attrs: { src: _vm.profile.photo } })],
                         1
                       ),
                       _vm._v(" "),
@@ -3618,9 +3653,7 @@ var render = function() {
                           _c(
                             "v-list-item-title",
                             [
-                              _c("strong", [
-                                _vm._v(_vm._s(_vm.user.user.name))
-                              ]),
+                              _c("strong", [_vm._v(_vm._s(_vm.profile.name))]),
                               _vm._v(" "),
                               _c("v-icon", [_vm._v("mdi-arrow-right-circle")])
                             ],
@@ -3728,7 +3761,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      !_vm.isProfile
+      !_vm.isProfile && !_vm.isAuth
         ? _c(
             "v-app-bar",
             { attrs: { app: "", color: "indigo darken-4", dark: "" } },
@@ -3832,6 +3865,43 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { icon: "" },
+                  on: {
+                    click: function($event) {
+                      $event.stopPropagation()
+                      return _vm.$router.go(-1)
+                    }
+                  }
+                },
+                [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-toolbar-title",
+                {
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      return _vm.$router.push("/")
+                    }
+                  }
+                },
+                [_c("strong", [_vm._v("Equifund")])]
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isAuth
+        ? _c(
+            "v-app-bar",
+            { attrs: { app: "", color: "indigo darken-4", dark: "" } },
+            [
               _c(
                 "v-toolbar-title",
                 {
@@ -65992,31 +66062,31 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'home',
     alias: '/home',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ./views/Home.vue */ "./resources/js/views/Home.vue"));
+      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ./views/Home.vue */ "./resources/js/views/Home.vue"));
     }
   }, {
     path: '/donations',
     name: 'donations',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/Donations.vue */ "./resources/js/views/Donations.vue"));
+      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/Donations.vue */ "./resources/js/views/Donations.vue"));
     }
   }, {
     path: '/blogs',
     name: 'blogs',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 8).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
+      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/Blogs.vue */ "./resources/js/views/Blogs.vue"));
     }
   }, {
     path: '/campaign/:id',
     name: 'campaign',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 9).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
+      return __webpack_require__.e(/*! import() */ 10).then(__webpack_require__.bind(null, /*! ./views/Campaign.vue */ "./resources/js/views/Campaign.vue"));
     }
   }, {
     path: '/campaigns',
     name: 'campaigns',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./views/Campaigns.vue */ "./resources/js/views/Campaigns.vue"));
+      return __webpack_require__.e(/*! import() */ 3).then(__webpack_require__.bind(null, /*! ./views/Campaigns.vue */ "./resources/js/views/Campaigns.vue"));
     }
   }, {
     path: '/verification',
@@ -66025,27 +66095,42 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       return __webpack_require__.e(/*! import() */ 14).then(__webpack_require__.bind(null, /*! ./views/Verification.vue */ "./resources/js/views/Verification.vue"));
     }
   }, {
-    path: '/update-password',
-    name: 'update-password',
-    component: function component() {
-      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./views/UpdatePassword.vue */ "./resources/js/views/UpdatePassword.vue"));
-    }
-  }, {
     path: '/profile',
     name: 'profile',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 11).then(__webpack_require__.bind(null, /*! ./views/Profile.vue */ "./resources/js/views/Profile.vue"));
+      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./views/Profile.vue */ "./resources/js/views/Profile.vue"));
+    },
+    meta: {
+      requiresAuth: true
     }
   }, {
     path: '/auth/social/:provider/callback',
     name: 'social',
     component: function component() {
-      return __webpack_require__.e(/*! import() */ 12).then(__webpack_require__.bind(null, /*! ./views/Social.vue */ "./resources/js/views/Social.vue"));
+      return __webpack_require__.e(/*! import() */ 13).then(__webpack_require__.bind(null, /*! ./views/Social.vue */ "./resources/js/views/Social.vue"));
     }
   }, {
     path: '*',
     redirect: '/'
   }]
+});
+router.beforeEach(function (to, from, next) {
+  if (to.matched.some(function (route) {
+    return route.meta.requiresAuth;
+  })) {
+    var auth = JSON.parse(localStorage.getItem('equifund')).auth;
+
+    if (auth.user.token) {
+      next();
+    } else {
+      alert('Access Restricted');
+      next({
+        path: '/'
+      });
+    }
+  }
+
+  next();
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
 

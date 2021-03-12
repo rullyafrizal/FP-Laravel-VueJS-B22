@@ -52,13 +52,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Verification",
   components: {
     RegenerateOTP: function RegenerateOTP() {
-      return __webpack_require__.e(/*! import() */ 4).then(__webpack_require__.bind(null, /*! ../components/RegenerateOTP.vue */ "./resources/js/components/RegenerateOTP.vue"));
+      return __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ../components/RegenerateOTP.vue */ "./resources/js/components/RegenerateOTP.vue"));
+    },
+    UpdatePassword: function UpdatePassword() {
+      return __webpack_require__.e(/*! import() */ 1).then(__webpack_require__.bind(null, /*! ../components/UpdatePassword.vue */ "./resources/js/components/UpdatePassword.vue"));
     }
   },
   data: function data() {
@@ -89,7 +91,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
     setAlert: 'alert/set',
     setDialogStatus: 'dialog/setStatus',
-    setDialogComponent: 'dialog/setComponent'
+    setDialogComponent: 'dialog/setComponent',
+    setAuth: 'auth/set'
   })), {}, {
     submit: function submit() {
       var _this = this;
@@ -115,7 +118,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               text: 'Verifikasi Berhasil, silahkan update password anda'
             });
 
-            window.location.href = '/update-password';
+            _this.setDialogComponent('UpdatePassword');
           }
         })["catch"](function (error) {
           var responses = error.response;

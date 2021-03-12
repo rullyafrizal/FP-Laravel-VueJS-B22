@@ -29,7 +29,7 @@ class UpdatePasswordController extends Controller
                 return response()->json([
                     'response_code' => '01',
                     'response_message' => 'Alamat Email Salah'
-                ], 200);
+                ], 401);
             }
 
             User::updateOrCreate(
@@ -41,7 +41,7 @@ class UpdatePasswordController extends Controller
 
             return response()->json([
                 'response_code' => '00',
-                'response_message' => 'Password berhasil diubah',
+                'response_message' => 'Password berhasil diubah, silahkan login',
                 'data' => $data,
 
             ]);

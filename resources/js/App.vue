@@ -15,11 +15,11 @@
             <v-list>
                 <v-list-item v-if="!guest" to="/profile" style="text-decoration: none;">
                     <v-list-item-avatar>
-                        <v-img :src="user.user.photo"></v-img>
+                        <v-img :src="profile.photo"></v-img>
                     </v-list-item-avatar>
                     <v-list-item-content>
                         <v-list-item-title>
-                            <strong>{{user.user.name}}</strong>
+                            <strong>{{profile.name}}</strong>
                             <v-icon>mdi-arrow-right-circle</v-icon>
                         </v-list-item-title>
                     </v-list-item-content>
@@ -62,7 +62,7 @@
         </v-navigation-drawer>
 
         <!--Header-->
-        <v-app-bar app color="indigo darken-4" dark v-if="!isProfile">
+        <v-app-bar app color="indigo darken-4" dark v-if="!isProfile && !isAuth">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
             <v-btn v-if="!isHome" icon @click.stop="$router.go(-1)">
                 <v-icon>mdi-arrow-left-circle</v-icon>
@@ -86,6 +86,12 @@
         </v-app-bar>
         <v-app-bar app color="indigo darken-4" dark v-if="isProfile">
             <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+            <v-btn icon @click.stop="$router.go(-1)">
+                <v-icon>mdi-arrow-left-circle</v-icon>
+            </v-btn>
+            <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;"><strong>Equifund</strong></v-toolbar-title>
+        </v-app-bar>
+        <v-app-bar app color="indigo darken-4" dark v-if="isAuth">
             <v-toolbar-title @click="$router.push('/')" style="cursor: pointer;"><strong>Equifund</strong></v-toolbar-title>
         </v-app-bar>
 
@@ -119,7 +125,9 @@ export default {
         Search : () => import('./components/Search.vue'),
         Login: () => import('./components/Login.vue'),
         Register: () => import('./components/Register.vue'),
-        UpdateProfile : () => import('./components/UpdateProfile.vue')
+        UpdateProfile : () => import('./components/UpdateProfile.vue'),
+        RegenerateOTP : () => import('./components/RegenerateOTP.vue'),
+        UpdatePassword: () => import('./components/UpdatePassword.vue'),
     },
     data: () => ({
         drawer: false,
@@ -135,6 +143,7 @@ export default {
                 route: '/campaigns'
             },
         ],
+        profile: {}
     }),
     computed: {
         isHome(){
@@ -183,6 +192,7 @@ export default {
                     color: 'success',
                     text: 'Successfully Logout'
                 })
+                this.$router.push({name: 'home'});
             }).catch((error) => {
                 let{data} = error.response
                 this.setAlert({
@@ -196,6 +206,20 @@ export default {
     mounted(){
         if(this.user){
             this.checkToken(this.user)
+        }
+    },
+    created(){
+        if(this.user.token.length > 0){
+            let url = '/api/profile/get-profile'
+            axios.get(url, {headers: {
+                    'Authorization': `token ${this.user.token}`
+                }}).then((response) => {
+                let{data} = response.data;
+                this.profile = data.profile;
+            }).catch((error) => {
+                let{responses} = error
+                console.log(responses)
+            })
         }
     }
 }

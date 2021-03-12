@@ -3,9 +3,6 @@
 
         <v-card elevation="2" class="pa-2 rounded-lg" tile-outlined>
             <v-toolbar dark color="indigo darken-4">
-                <v-btn icon @click.stop="$router.go(-1)">
-                    <v-icon>mdi-arrow-left-circle</v-icon>
-                </v-btn>
                 <v-toolbar-title><strong>Profile</strong></v-toolbar-title>
                 <v-spacer></v-spacer>
                 <v-btn icon @click="setDialogComponent('UpdateProfile')">

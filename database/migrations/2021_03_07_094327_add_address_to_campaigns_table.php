@@ -16,7 +16,7 @@ class AddAddressToCampaignsTable extends Migration
         Schema::table('campaigns', function (Blueprint $table) {
             $table->string('address')->after('description')->nullable();
             $table->integer('required')->after('image')->nullable();
-            $table->integer('collected')->after('required')->nullable();
+            $table->integer('collected')->after('required')->nullable()->default(0);
         });
     }
 

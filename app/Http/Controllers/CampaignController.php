@@ -48,7 +48,7 @@ class CampaignController extends Controller
             'title' => request('title'),
             'description' => request('description'),
             'address' => request('address'),
-            'collected' => 0,
+            'collected' => request('collected'),
             'required' => request('required'),
             'phone' => request('phone')
         ]);

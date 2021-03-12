@@ -81,7 +81,6 @@ export default {
         },
         onChange(e) {
             this.photo = e.target.files[0];
-            console.log(e.target.files[0]);
         },
         update(e) {
             e.preventDefault();
@@ -103,6 +102,7 @@ export default {
                 }).then((response) => {
                     let codeResponse = response.data.response_code;
                     if (codeResponse === "00") {
+                        this.currentUser.user = response.data.data.profile
                         this.setAlert({
                             status: true,
                             color: 'primary',

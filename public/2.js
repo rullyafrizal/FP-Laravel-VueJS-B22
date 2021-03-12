@@ -98,7 +98,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     onChange: function onChange(e) {
       this.photo = e.target.files[0];
-      console.log(e.target.files[0]);
     },
     update: function update(e) {
       var _this = this;
@@ -121,6 +120,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           var codeResponse = response.data.response_code;
 
           if (codeResponse === "00") {
+            _this.currentUser.user = response.data.data.profile;
+
             _this.setAlert({
               status: true,
               color: 'primary',

@@ -70,6 +70,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Profile",
@@ -286,6 +290,19 @@ var render = function() {
                             _c("td", { staticClass: "blue--text" }, [
                               _vm._v(_vm._s(_vm.profile.phone))
                             ])
+                          ]),
+                          _vm._v(" "),
+                          _c("tr", [
+                            _c(
+                              "td",
+                              [
+                                _c("v-icon", [_vm._v("mdi-lock")]),
+                                _vm._v(" Password")
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("td", [_vm._v("*************")])
                           ])
                         ])
                       ])

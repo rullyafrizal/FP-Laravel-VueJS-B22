@@ -42,6 +42,10 @@
                                 <td><v-icon>mdi-phone</v-icon> Telepon</td>
                                 <td class="blue--text">{{profile.phone}}</td>
                             </tr>
+                            <tr>
+                                <td><v-icon>mdi-lock</v-icon> Password</td>
+                                <td>*************</td>
+                            </tr>
                             </tbody>
                         </v-simple-table>
                     </v-col>

@@ -86,7 +86,7 @@ export default {
                     });
                     this.close();
                     this.$router.push({name: 'home'});
-                    setTimeout(() => this.setDialogComponent('Login'), 2500)
+                    setTimeout(() => this.setDialogComponent('Login'), 2000)
                 }).catch((error) => {
                     let responses = error.response;
                     if(responses.status === 422){

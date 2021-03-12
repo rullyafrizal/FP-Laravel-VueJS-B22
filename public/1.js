@@ -113,7 +113,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           setTimeout(function () {
             return _this.setDialogComponent('Login');
-          }, 2500);
+          }, 2000);
         })["catch"](function (error) {
           var responses = error.response;
 

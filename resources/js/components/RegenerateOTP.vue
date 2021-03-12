@@ -1,6 +1,9 @@
 <template>
         <v-card class="rounded-lg">
             <v-card-title>
+                <v-btn icon @click.native="close">
+                    <v-icon>mdi-close-circle</v-icon>
+                </v-btn>
                 Regenerate OTP
             </v-card-title>
             <v-card-text>
@@ -13,9 +16,7 @@
                         <v-btn @click="regenerate" color="red darken-2" :disabled="!valid" class="white--text">
                             Regenerate
                         </v-btn>
-                        <v-btn color="indigo darken-4" @click.native="close" class="white--text">
-                            Close
-                        </v-btn>
+
                     </div>
                 </v-form>
             </v-card-text>

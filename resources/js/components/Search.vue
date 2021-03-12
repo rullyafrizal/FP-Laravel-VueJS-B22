@@ -1,10 +1,10 @@
 <template>
-    <v-card>
-        <v-toolbar class="mb-5 mt-3" dark color="indigo darken-4">
-            <v-btn class="mb-2" icon dark @click.native="close">
-                <v-icon>mdi-arrow-left-circle</v-icon>
+    <v-card class="rounded-lg" width="800">
+        <v-toolbar class="py-2" dark color="indigo darken-4">
+            <v-btn class="mb-3" icon dark @click.native="close">
+                <v-icon>mdi-close-circle</v-icon>
             </v-btn>
-            <v-text-field class="mt-5 rounded-pill" append-icon="mdi-microphone"
+            <v-text-field class="mt-5 mb-1 rounded-pill" append-icon="mdi-microphone"
                           flat label="Pencarian"
                           prepend-inner-icon="mdi-magnify"
                           v-model="keyword" @keyup="doSearch" solo-inverted>

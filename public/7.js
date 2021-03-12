@@ -96,9 +96,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           _this.close();
 
-          _this.$router.push({
-            name: 'verification'
-          });
+          window.location.href = '/verification';
         })["catch"](function (error) {
           var responses = error.response;
 
@@ -174,7 +172,7 @@ var render = function() {
                 }
               }
             },
-            [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+            [_c("v-icon", [_vm._v("mdi-close-circle")])],
             1
           ),
           _vm._v(" "),

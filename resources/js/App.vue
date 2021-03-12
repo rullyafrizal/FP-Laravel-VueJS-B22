@@ -5,7 +5,7 @@
     <alert/>
 
         <keep-alive>
-            <v-dialog v-model="dialog" max-width="600px" persistent transition="dialog-bottom-transition">
+            <v-dialog v-model="dialog" :fullscreen="isSearch" max-width="600px" transition="dialog-bottom-transition">
                 <component :is="currentComponent" @closed="setDialogStatus"></component>
             </v-dialog>
         </keep-alive>
@@ -20,7 +20,7 @@
                     <v-list-item-content>
                         <v-list-item-title>
                             <strong>{{profile.name}}</strong>
-                            <v-icon>mdi-arrow-right-circle</v-icon>
+                            <v-icon>mdi-arrow-right</v-icon>
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
@@ -154,6 +154,11 @@ export default {
         },
         isProfile(){
             return (this.$route.path === '/profile')
+        },
+        isSearch(){
+            if(this.currentComponent === "Search"){
+                return 'fullscreen'
+            }
         },
         ...mapGetters({
             'transactions' : 'transactions/transactions',

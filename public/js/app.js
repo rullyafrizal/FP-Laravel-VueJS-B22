@@ -2196,6 +2196,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     isProfile: function isProfile() {
       return this.$route.path === '/profile';
+    },
+    isSearch: function isSearch() {
+      if (this.currentComponent === "Search") {
+        return 'fullscreen';
+      }
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
     'transactions': 'transactions/transactions',
@@ -3553,8 +3558,8 @@ var render = function() {
             "v-dialog",
             {
               attrs: {
+                fullscreen: _vm.isSearch,
                 "max-width": "600px",
-                persistent: "",
                 transition: "dialog-bottom-transition"
               },
               model: {
@@ -3655,7 +3660,7 @@ var render = function() {
                             [
                               _c("strong", [_vm._v(_vm._s(_vm.profile.name))]),
                               _vm._v(" "),
-                              _c("v-icon", [_vm._v("mdi-arrow-right-circle")])
+                              _c("v-icon", [_vm._v("mdi-arrow-right")])
                             ],
                             1
                           )

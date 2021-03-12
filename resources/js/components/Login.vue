@@ -2,7 +2,7 @@
     <v-card class="rounded-lg">
         <v-toolbar dark color="indigo darken-4">
             <v-btn icon dark @click.native="close">
-                <v-icon>mdi-arrow-left-circle</v-icon>
+                <v-icon>mdi-close-circle</v-icon>
             </v-btn>
             <v-toolbar-title>Login</v-toolbar-title>
         </v-toolbar>
@@ -83,6 +83,7 @@ export default {
                             text: 'Login Success'
                         });
                         this.close();
+                        window.location.href = '/'
                     } else {
                         this.setAlert({
                             status: true,

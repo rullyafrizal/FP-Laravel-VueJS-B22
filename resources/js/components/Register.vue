@@ -2,7 +2,7 @@
     <v-card class="rounded-lg">
         <v-toolbar dark color="indigo darken-4">
             <v-btn icon dark @click.native="close">
-                <v-icon>mdi-arrow-left-circle</v-icon>
+                <v-icon>mdi-close-circle</v-icon>
             </v-btn>
             <v-toolbar-title>Register</v-toolbar-title>
         </v-toolbar>
@@ -77,7 +77,7 @@ export default {
                         text: 'Register Success, silahkan cek email untuk verifikasi kode OTP'
                     });
                     this.close();
-                    this.$router.push({name: 'verification'});
+                    window.location.href = '/verification'
 
                 }).catch((error) => {
                     let responses = error.response;

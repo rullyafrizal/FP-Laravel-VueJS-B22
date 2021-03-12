@@ -40,6 +40,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "RegenerateOTP",
@@ -122,7 +123,26 @@ var render = function() {
     "v-card",
     { staticClass: "rounded-lg" },
     [
-      _c("v-card-title", [_vm._v("\n        Regenerate OTP\n    ")]),
+      _c(
+        "v-card-title",
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: { icon: "" },
+              nativeOn: {
+                click: function($event) {
+                  return _vm.close($event)
+                }
+              }
+            },
+            [_c("v-icon", [_vm._v("mdi-close-circle")])],
+            1
+          ),
+          _vm._v("\n        Regenerate OTP\n    ")
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-card-text",
@@ -174,20 +194,6 @@ var render = function() {
                         "\n                    Regenerate\n                "
                       )
                     ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      staticClass: "white--text",
-                      attrs: { color: "indigo darken-4" },
-                      nativeOn: {
-                        click: function($event) {
-                          return _vm.close($event)
-                        }
-                      }
-                    },
-                    [_vm._v("\n                    Close\n                ")]
                   )
                 ],
                 1

@@ -65,9 +65,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }],
       phone: '',
       phoneRules: [function (v) {
+        return !!v || 'Phone Required';
+      }, function (v) {
         return /([0-9])+/.test(v) || 'Phone must be numeric';
       }, function (v) {
-        return v && v.length >= 10 && v.length <= 12 || 'Min 10 Max 12 Characters';
+        return v && v.length <= 12 || 'Max 12 Characters';
       }],
       address: '',
       addressRules: [function (v) {
@@ -185,7 +187,7 @@ var render = function() {
                 }
               }
             },
-            [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+            [_c("v-icon", [_vm._v("mdi-close-circle")])],
             1
           ),
           _vm._v("\n        Update Profile\n    ")

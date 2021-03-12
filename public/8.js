@@ -98,18 +98,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "v-card",
+    { staticClass: "rounded-lg", attrs: { width: "800" } },
     [
       _c(
         "v-toolbar",
-        {
-          staticClass: "mb-5 mt-3",
-          attrs: { dark: "", color: "indigo darken-4" }
-        },
+        { staticClass: "py-2", attrs: { dark: "", color: "indigo darken-4" } },
         [
           _c(
             "v-btn",
             {
-              staticClass: "mb-2",
+              staticClass: "mb-3",
               attrs: { icon: "", dark: "" },
               nativeOn: {
                 click: function($event) {
@@ -117,12 +115,12 @@ var render = function() {
                 }
               }
             },
-            [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+            [_c("v-icon", [_vm._v("mdi-close-circle")])],
             1
           ),
           _vm._v(" "),
           _c("v-text-field", {
-            staticClass: "mt-5 rounded-pill",
+            staticClass: "mt-5 mb-1 rounded-pill",
             attrs: {
               "append-icon": "mdi-microphone",
               flat: "",

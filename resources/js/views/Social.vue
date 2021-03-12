@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container mx-auto">
         <h2>Please Wait.....</h2>
     </div>
 </template>

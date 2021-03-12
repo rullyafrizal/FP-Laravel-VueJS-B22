@@ -104,6 +104,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
 
             _this.close();
+
+            window.location.href = '/';
           } else {
             _this.setAlert({
               status: true,
@@ -186,7 +188,7 @@ var render = function() {
                 }
               }
             },
-            [_c("v-icon", [_vm._v("mdi-arrow-left-circle")])],
+            [_c("v-icon", [_vm._v("mdi-close-circle")])],
             1
           ),
           _vm._v(" "),

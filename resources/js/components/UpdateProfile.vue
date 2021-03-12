@@ -2,7 +2,7 @@
     <v-card>
         <v-card-title>
             <v-btn icon @click.native="close">
-                <v-icon>mdi-arrow-left-circle</v-icon>
+                <v-icon>mdi-close-circle</v-icon>
             </v-btn>
             Update Profile
         </v-card-title>
@@ -48,8 +48,9 @@ export default {
             ],
             phone: '',
             phoneRules: [
+                v => !!v || 'Phone Required',
                 v => /([0-9])+/.test(v) || 'Phone must be numeric',
-                v => (v && v.length >= 10 && v.length <= 12) || 'Min 10 Max 12 Characters'
+                v => (v && v.length <= 12) || 'Max 12 Characters'
             ],
             address: '',
             addressRules: [

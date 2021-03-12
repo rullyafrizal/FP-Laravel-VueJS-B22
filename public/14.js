@@ -119,6 +119,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
 
             _this.setDialogComponent('UpdatePassword');
+
+            window.location.reload();
           }
         })["catch"](function (error) {
           var responses = error.response;

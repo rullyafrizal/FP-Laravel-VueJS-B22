@@ -96,6 +96,7 @@ export default {
                             text: 'Verifikasi Berhasil, silahkan update password anda'
                         });
                         this.setDialogComponent('UpdatePassword')
+                        window.location.reload();
                     }
 
                 }).catch((error) => {

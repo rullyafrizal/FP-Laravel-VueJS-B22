@@ -107,11 +107,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
               color: 'error'
             });
           } else if (responses.status === 500) {
-            _this.setAlert({
-              status: true,
-              text: 'Silahkan Verifikasi Email Terlebih Dahulu',
-              color: 'error'
-            });
+            console.log(responses.data);
           }
         });
       }

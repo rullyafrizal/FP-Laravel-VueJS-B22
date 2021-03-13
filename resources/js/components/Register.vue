@@ -88,11 +88,7 @@ export default {
                             color: 'error'
                         });
                     } else if (responses.status === 500){
-                        this.setAlert({
-                            status: true,
-                            text: 'Silahkan Verifikasi Email Terlebih Dahulu',
-                            color: 'error'
-                        });
+                        console.log(responses.data)
                     }
 
                 });

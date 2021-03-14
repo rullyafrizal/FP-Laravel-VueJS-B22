@@ -5,7 +5,7 @@
         </v-subheader>
 
         <v-layout wrap>
-            <v-flex xs3 v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id">
+            <v-flex xs5 v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id">
                 <campaign-item :campaign="campaign"/>
             </v-flex>
         </v-layout>

@@ -81,7 +81,8 @@ export default {
 
                 }).catch((error) => {
                     let responses = error.response;
-                    if(responses.status === 401){
+                    console.log(responses);
+                    if(responses.status === 401 || responses.status === 422){
                         this.setAlert({
                             status: true,
                             text: responses.data.response_message,

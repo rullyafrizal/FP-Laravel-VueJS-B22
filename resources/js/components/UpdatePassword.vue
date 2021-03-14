@@ -89,6 +89,7 @@ export default {
                     setTimeout(() => this.setDialogComponent('Login'), 2000)
                 }).catch((error) => {
                     let responses = error.response;
+                    console.log(responses);
                     if(responses.status === 422){
                         this.setAlert({
                             status: true,

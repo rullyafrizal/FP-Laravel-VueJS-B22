@@ -116,6 +116,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }, 2000);
         })["catch"](function (error) {
           var responses = error.response;
+          console.log(responses);
 
           if (responses.status === 422) {
             _this.setAlert({

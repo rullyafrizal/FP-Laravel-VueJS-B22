@@ -130,6 +130,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var data = response.data;
         window.location.href = data.url;
       })["catch"](function (error) {
+        var responses = error.response;
+        console.log(responses);
+
         _this2.setAlert({
           status: true,
           text: 'Register Failed',

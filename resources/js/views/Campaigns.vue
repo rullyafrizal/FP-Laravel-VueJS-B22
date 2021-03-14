@@ -33,12 +33,12 @@ export default {
             let url = 'api/campaign?page=' + this.page;
             axios.get(url).then((response) => {
                 let{data} = response.data;
-                this.campaigns = data.campaigns.data
-                this.page = data.campaigns.current_page
-                this.lengthPage = data.campaigns.last_page
+                this.campaigns = data.campaigns.data;
+                this.page = data.campaigns.current_page;
+                this.lengthPage = data.campaigns.last_page;
             }).catch((error) => {
-                let{responses} = error
-                console.log(responses)
+                let{responses} = error;
+                console.log(responses);
             })
         }
     },

@@ -199,7 +199,8 @@ export default {
                 })
                 this.$router.push({name: 'home'});
             }).catch((error) => {
-                let{data} = error.response
+                let responses = error.response;
+                console.log(responses);
                 this.setAlert({
                     status: true,
                     color: 'error',
@@ -222,8 +223,8 @@ export default {
                 let{data} = response.data;
                 this.profile = data.profile;
             }).catch((error) => {
-                let{responses} = error
-                console.log(responses)
+                let{responses} = error;
+                console.log(responses);
             })
         }
     }

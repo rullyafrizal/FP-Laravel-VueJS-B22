@@ -47,6 +47,8 @@ export default {
                     });
                 }
             }).catch((error) => {
+                let responses = error.response;
+                console.log(responses);
                 this.setAlert({
                     status: true,
                     color: 'error',

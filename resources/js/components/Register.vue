@@ -110,6 +110,8 @@ export default {
                 let data = response.data;
                 window.location.href = data.url;
             }).catch((error) => {
+                let responses = error.response;
+                console.log(responses)
                 this.setAlert({
                     status: true,
                     text: 'Register Failed',

@@ -115,6 +115,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           }
         })["catch"](function (error) {
           var responses = error.response;
+          console.log(responses);
 
           if (responses.status === 401) {
             _this.setAlert({

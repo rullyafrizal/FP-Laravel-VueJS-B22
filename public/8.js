@@ -67,7 +67,7 @@ __webpack_require__.r(__webpack_exports__);
           var data = response.data.data;
           _this.campaigns = data.campaigns;
         })["catch"](function (error) {
-          console.log(error);
+          console.log(error.response);
         });
       } else {
         this.campaigns = [];
@@ -128,7 +128,17 @@ var render = function() {
               "prepend-inner-icon": "mdi-magnify",
               "solo-inverted": ""
             },
-            on: { keyup: _vm.doSearch },
+            on: {
+              keyup: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.doSearch($event)
+              }
+            },
             model: {
               value: _vm.keyword,
               callback: function($$v) {

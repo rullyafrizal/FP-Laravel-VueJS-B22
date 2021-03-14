@@ -70,14 +70,14 @@ export default {
     },
     methods: {
         go(){
-            let{id} = this.$route.params
-            let url = '/api/campaign/' + id
+            let{id} = this.$route.params;
+            let url = '/api/campaign/' + id;
             axios.get(url).then((response) => {
-                let{data} = response.data
-                this.campaign = data.campaign
+                let{data} = response.data;
+                this.campaign = data.campaign;
             }).catch((error) => {
-                let{responses} = error
-                console.log(responses)
+                let{responses} = error;
+                console.log(responses);
             })
         },
         ...mapMutations({

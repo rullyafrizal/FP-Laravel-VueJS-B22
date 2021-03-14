@@ -2246,7 +2246,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           name: 'home'
         });
       })["catch"](function (error) {
-        var data = error.response.data;
+        var responses = error.response;
+        console.log(responses);
 
         _this.setAlert({
           status: true,

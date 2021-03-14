@@ -101,8 +101,8 @@ export default {
                     let{data} = response.data;
                     this.profile = data.profile;
                 }).catch((error) => {
-                    let{responses} = error
-                    console.log(responses)
+                    let{responses} = error;
+                    console.log(responses);
                 })
             }
         },

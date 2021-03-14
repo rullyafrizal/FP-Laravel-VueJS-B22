@@ -7,7 +7,7 @@
             <v-text-field class="mt-5 mb-1 rounded-pill" append-icon="mdi-microphone"
                           flat label="Pencarian"
                           prepend-inner-icon="mdi-magnify"
-                          v-model="keyword" @keyup="doSearch" solo-inverted>
+                          v-model="keyword" @keyup.enter="doSearch" solo-inverted>
             </v-text-field>
         </v-toolbar>
         <v-card-text>
@@ -52,7 +52,7 @@ export default {
                     let{data} = response.data
                     this.campaigns = data.campaigns
                 }).catch((error) => {
-                    console.log(error)
+                    console.log(error.response)
                 })
             } else {
                 this.campaigns = []

@@ -101,7 +101,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           var responses = error.response;
           console.log(responses);
 
-          if (responses.status === 401 || responses.status === 422) {
+          if (responses.status === 401) {
             _this.setAlert({
               status: true,
               text: responses.data.response_message,
@@ -109,6 +109,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
             });
           } else if (responses.status === 500) {
             console.log(responses.data);
+          } else if (responses.status === 422) {
+            _this.setAlert({
+              status: true,
+              text: responses.data.errors.email[0],
+              color: 'error'
+            });
           }
         });
       }

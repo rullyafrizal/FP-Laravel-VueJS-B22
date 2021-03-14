@@ -82,7 +82,7 @@ export default {
                 }).catch((error) => {
                     let responses = error.response;
                     console.log(responses);
-                    if(responses.status === 401 || responses.status === 422){
+                    if(responses.status === 401){
                         this.setAlert({
                             status: true,
                             text: responses.data.response_message,
@@ -90,6 +90,12 @@ export default {
                         });
                     } else if (responses.status === 500){
                         console.log(responses.data)
+                    } else if (responses.status === 422){
+                        this.setAlert({
+                            status: true,
+                            text: responses.data.errors.email[0],
+                            color: 'error'
+                        });
                     }
 
                 });

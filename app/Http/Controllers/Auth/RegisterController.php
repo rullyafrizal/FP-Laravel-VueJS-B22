@@ -27,14 +27,6 @@ class RegisterController extends Controller
         try {
             $user = User::where('email', request('email'))->first();
 
-            if($user)
-            {
-                return response()->json([
-                    'response_code' => '01',
-                    'response_message' => 'Email Sudah Pernah Terdaftar, Silahkan Login',
-                ]);
-            }
-
             User::create([
                 'name' => request('name'),
                 'email' => request('email'),

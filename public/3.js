@@ -264,7 +264,10 @@ var render = function() {
         _vm._l(_vm.campaigns, function(campaign, index) {
           return _c(
             "v-flex",
-            { key: "campaign-" + campaign.id, attrs: { xs4: "" } },
+            {
+              key: "campaign-" + campaign.id,
+              attrs: { xs4: "", md8: "", lg12: "" }
+            },
             [_c("campaign-item", { attrs: { campaign: campaign } })],
             1
           )

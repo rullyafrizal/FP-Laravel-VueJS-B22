@@ -2,7 +2,7 @@
     <div>
         <v-row>
             <v-col cols="12" sm="6" md="8">
-                <v-card elevation="1" class="pa-2 mr-2 rounded-xl" tile outlined>
+                <v-card elevation="1" class="pa-2 mx-1 my-1 rounded-xl" tile outlined>
                     <v-img :src="campaign.image" class="white--text rounded-xl" max-height="400px">
                         <v-card-title class="fill-height align-end" v-text="campaign.title"></v-card-title>
                         <template v-slot:placeholder>
@@ -14,8 +14,8 @@
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="6" md="4">
-                <v-card elevation="2" class="pa-2 mt-3 rounded-xl" tile-outlined>
+            <v-col cols="6" md="4" xs="14">
+                <v-card elevation="2" class="pa-2 mx-1 my-1 rounded-xl" tile-outlined>
                     <v-card-text>
                         <v-simple-table>
                             <thead>

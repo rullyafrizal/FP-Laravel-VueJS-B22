@@ -158,7 +158,7 @@ var render = function() {
               _c(
                 "v-card",
                 {
-                  staticClass: "pa-2 mr-2 rounded-xl",
+                  staticClass: "pa-2 mx-1 my-1 rounded-xl",
                   attrs: { elevation: "1", tile: "", outlined: "" }
                 },
                 [
@@ -208,12 +208,12 @@ var render = function() {
           _vm._v(" "),
           _c(
             "v-col",
-            { attrs: { cols: "6", md: "4" } },
+            { attrs: { cols: "6", md: "4", xs: "14" } },
             [
               _c(
                 "v-card",
                 {
-                  staticClass: "pa-2 mt-3 rounded-xl",
+                  staticClass: "pa-2 mx-1 my-1 rounded-xl",
                   attrs: { elevation: "2", "tile-outlined": "" }
                 },
                 [

@@ -266,7 +266,7 @@ var render = function() {
             "v-flex",
             {
               key: "campaign-" + campaign.id,
-              attrs: { xs12: "", sm8: "", md6: "", lg4: "" }
+              attrs: { xs11: "", sm8: "", md6: "", lg4: "" }
             },
             [_c("campaign-item", { attrs: { campaign: campaign } })],
             1

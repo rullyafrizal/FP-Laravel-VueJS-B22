@@ -75,6 +75,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Campaign",
@@ -141,186 +145,212 @@ var render = function() {
     "div",
     [
       _c(
-        "v-card",
-        {
-          staticClass: "pa-2 mr-2 rounded-xl",
-          attrs: { elevation: "1", tile: "", outlined: "" }
-        },
+        "v-flex",
+        { attrs: { xs14: "", lg8: "" } },
         [
           _c(
-            "v-img",
+            "v-card",
             {
-              staticClass: "white--text rounded-xl",
-              attrs: { src: _vm.campaign.image, "max-height": "400px" },
-              scopedSlots: _vm._u([
-                {
-                  key: "placeholder",
-                  fn: function() {
-                    return [
-                      _c("v-skeleton-loader", { attrs: { type: "image" } })
-                    ]
-                  },
-                  proxy: true
-                }
-              ])
+              staticClass: "pa-2 mr-2 rounded-xl",
+              attrs: { elevation: "1", tile: "", outlined: "" }
             },
             [
-              _c("v-card-title", {
-                staticClass: "fill-height align-end",
-                domProps: { textContent: _vm._s(_vm.campaign.title) }
-              })
+              _c(
+                "v-img",
+                {
+                  staticClass: "white--text rounded-xl",
+                  attrs: { src: _vm.campaign.image, "max-height": "400px" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "placeholder",
+                      fn: function() {
+                        return [
+                          _c("v-skeleton-loader", { attrs: { type: "image" } })
+                        ]
+                      },
+                      proxy: true
+                    }
+                  ])
+                },
+                [
+                  _c("v-card-title", {
+                    staticClass: "fill-height align-end",
+                    domProps: { textContent: _vm._s(_vm.campaign.title) }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _vm._v("\n                Description: "),
+                _c("br"),
+                _vm._v(
+                  " " + _vm._s(_vm.campaign.description) + "\n            "
+                )
+              ])
             ],
             1
-          ),
-          _vm._v(" "),
-          _c("v-card-text", [
-            _vm._v("\n            Description: "),
-            _c("br"),
-            _vm._v(" " + _vm._s(_vm.campaign.description) + "\n        ")
-          ])
+          )
         ],
         1
       ),
       _vm._v(" "),
       _c(
-        "v-card",
-        {
-          staticClass: "pa-2 mt-3 rounded-xl",
-          attrs: { elevation: "2", "tile-outlined": "" }
-        },
+        "v-flex",
+        { attrs: { xs14: "", lg8: "" } },
         [
           _c(
-            "v-card-text",
-            [
-              _c("v-simple-table", [
-                _c("thead", [
-                  _c("tr", [
-                    _c("th", { staticClass: "text-left" }, [
-                      _c("h3", [_vm._v("Detail")])
-                    ]),
-                    _vm._v(" "),
-                    _c("th")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("tbody", [
-                  _c("tr", [
-                    _c(
-                      "td",
-                      [
-                        _c("v-icon", [_vm._v("mdi-home-city")]),
-                        _vm._v(" Alamat")
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.campaign.address))])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      [_c("v-icon", [_vm._v("mdi-phone")]), _vm._v(" Telepon")],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(_vm.campaign.phone))])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      [
-                        _c("v-icon", [_vm._v("mdi-hand-heart")]),
-                        _vm._v(" Terkumpul")
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "blue--text" }, [
-                      _vm._v(
-                        "Rp" +
-                          _vm._s(_vm.campaign.collected.toLocaleString("id-ID"))
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      [
-                        _c("v-icon", [_vm._v("mdi-cash")]),
-                        _vm._v(" Dibutuhkan")
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("td", { staticClass: "orange--text" }, [
-                      _vm._v(
-                        "Rp" +
-                          _vm._s(_vm.campaign.required.toLocaleString("id-ID"))
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("tr", [
-                    _c(
-                      "td",
-                      [
-                        _c("v-icon", [_vm._v("mdi-progress-check")]),
-                        _vm._v(" Progress")
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      { staticClass: "orange--text" },
-                      [
-                        _c(
-                          "v-progress-linear",
-                          {
-                            staticClass: "rounded-pill",
-                            attrs: {
-                              color: "indigo darken-4",
-                              height: "15",
-                              value: _vm.progress(_vm.campaign),
-                              striped: ""
-                            }
-                          },
-                          [
-                            _c("strong", { staticClass: "white--text" }, [
-                              _vm._v(_vm._s(_vm.progress(_vm.campaign)) + "%")
-                            ])
-                          ]
-                        )
-                      ],
-                      1
-                    )
-                  ])
-                ])
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card-actions",
+            "v-card",
+            {
+              staticClass: "pa-2 mt-3 rounded-xl",
+              attrs: { elevation: "2", "tile-outlined": "" }
+            },
             [
               _c(
-                "v-btn",
-                {
-                  staticClass: "rounded-pill",
-                  attrs: {
-                    block: "",
-                    color: "primary",
-                    disabled: _vm.campaign.collected >= _vm.campaign.required
-                  },
-                  on: { click: _vm.donate }
-                },
+                "v-card-text",
                 [
-                  _c("v-icon", [_vm._v("mdi-money")]),
-                  _vm._v("  \n                DONATE\n            ")
+                  _c("v-simple-table", [
+                    _c("thead", [
+                      _c("tr", [
+                        _c("th", { staticClass: "text-left" }, [
+                          _c("h3", [_vm._v("Detail")])
+                        ]),
+                        _vm._v(" "),
+                        _c("th")
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tbody", [
+                      _c("tr", [
+                        _c(
+                          "td",
+                          [
+                            _c("v-icon", [_vm._v("mdi-home-city")]),
+                            _vm._v(" Alamat")
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.campaign.address))])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          [
+                            _c("v-icon", [_vm._v("mdi-phone")]),
+                            _vm._v(" Telepon")
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(_vm.campaign.phone))])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          [
+                            _c("v-icon", [_vm._v("mdi-hand-heart")]),
+                            _vm._v(" Terkumpul")
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "blue--text" }, [
+                          _vm._v(
+                            "Rp" +
+                              _vm._s(
+                                _vm.campaign.collected.toLocaleString("id-ID")
+                              )
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          [
+                            _c("v-icon", [_vm._v("mdi-cash")]),
+                            _vm._v(" Dibutuhkan")
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c("td", { staticClass: "orange--text" }, [
+                          _vm._v(
+                            "Rp" +
+                              _vm._s(
+                                _vm.campaign.required.toLocaleString("id-ID")
+                              )
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("tr", [
+                        _c(
+                          "td",
+                          [
+                            _c("v-icon", [_vm._v("mdi-progress-check")]),
+                            _vm._v(" Progress")
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          { staticClass: "orange--text" },
+                          [
+                            _c(
+                              "v-progress-linear",
+                              {
+                                staticClass: "rounded-pill",
+                                attrs: {
+                                  color: "indigo darken-4",
+                                  height: "15",
+                                  value: _vm.progress(_vm.campaign),
+                                  striped: ""
+                                }
+                              },
+                              [
+                                _c("strong", { staticClass: "white--text" }, [
+                                  _vm._v(
+                                    _vm._s(_vm.progress(_vm.campaign)) + "%"
+                                  )
+                                ])
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    ])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "rounded-pill",
+                      attrs: {
+                        block: "",
+                        color: "primary",
+                        disabled:
+                          _vm.campaign.collected >= _vm.campaign.required
+                      },
+                      on: { click: _vm.donate }
+                    },
+                    [
+                      _c("v-icon", [_vm._v("mdi-money")]),
+                      _vm._v("  \n                    DONATE\n                ")
+                    ],
+                    1
+                  )
                 ],
                 1
               )

@@ -99,8 +99,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           window.location.href = '/verification';
         })["catch"](function (error) {
           var responses = error.response;
+          console.log(responses);
 
-          if (responses.status === 401) {
+          if (responses.status === 401 || responses.status === 422) {
             _this.setAlert({
               status: true,
               text: responses.data.response_message,

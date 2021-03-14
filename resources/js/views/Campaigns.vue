@@ -5,9 +5,9 @@
         </v-subheader>
 
         <v-layout wrap>
-            <div v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id">
+            <v-flex xs3 v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id">
                 <campaign-item :campaign="campaign"/>
-            </div>
+            </v-flex>
         </v-layout>
 
         <v-pagination v-model="page" @input="go" :length="lengthPage" :total-visible="6"></v-pagination>

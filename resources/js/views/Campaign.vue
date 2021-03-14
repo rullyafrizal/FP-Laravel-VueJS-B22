@@ -12,8 +12,6 @@
                     Description: <br> {{campaign.description}}
                 </v-card-text>
             </v-card>
-        </v-flex>
-        <v-flex xs14 lg8>
             <v-card elevation="2" class="pa-2 mt-3 rounded-xl" tile-outlined>
                 <v-card-text>
                     <v-simple-table>
@@ -57,6 +55,8 @@
                 </v-card-actions>
             </v-card>
         </v-flex>
+
+
 
     </div>
 </template>

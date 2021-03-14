@@ -190,15 +190,8 @@ var render = function() {
               ])
             ],
             1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-flex",
-        { attrs: { xs14: "", lg8: "" } },
-        [
+          ),
+          _vm._v(" "),
           _c(
             "v-card",
             {

@@ -146,7 +146,7 @@ var render = function() {
     [
       _c(
         "v-flex",
-        { attrs: { xs14: "", lg8: "" } },
+        { attrs: { xs14: "", sm10: "", md8: "", lg6: "" } },
         [
           _c(
             "v-card",

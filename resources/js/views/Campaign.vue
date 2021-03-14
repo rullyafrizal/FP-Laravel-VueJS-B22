@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-flex xs14 lg8>
+        <v-flex xs14 sm10 md8 lg6>
             <v-card elevation="1" class="pa-2 mr-2 rounded-xl" tile outlined>
                 <v-img :src="campaign.image" class="white--text rounded-xl" max-height="400px">
                     <v-card-title class="fill-height align-end" v-text="campaign.title"></v-card-title>

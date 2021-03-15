@@ -74,9 +74,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Campaign",
@@ -145,7 +142,7 @@ var render = function() {
       _c(
         "v-card",
         {
-          staticClass: "pa-2 mx-1 my-1 rounded-xl",
+          staticClass: "pa-2 my-1 rounded-xl",
           attrs: { elevation: "1", tile: "", outlined: "" }
         },
         [
@@ -187,7 +184,7 @@ var render = function() {
       _c(
         "v-card",
         {
-          staticClass: "pa-2 mx-1 my-1 rounded-xl",
+          staticClass: "pa-2 my-1 rounded-xl",
           attrs: { elevation: "2", "tile-outlined": "" }
         },
         [

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-card elevation="1" class="pa-2 mx-1 my-1 rounded-xl" tile outlined>
+        <v-card elevation="1" class="pa-2 my-1 rounded-xl" tile outlined>
             <v-img :src="campaign.image" class="white--text rounded-xl" max-height="400px">
                 <v-card-title class="fill-height align-end" v-text="campaign.title"></v-card-title>
                 <template v-slot:placeholder>
@@ -11,7 +11,7 @@
                 Description: <br> {{campaign.description}}
             </v-card-text>
         </v-card>
-        <v-card elevation="2" class="pa-2 mx-1 my-1 rounded-xl" tile-outlined>
+        <v-card elevation="2" class="pa-2 my-1 rounded-xl" tile-outlined>
             <v-card-text>
                 <v-simple-table>
                     <thead>
@@ -53,9 +53,6 @@
                 </v-btn>
             </v-card-actions>
         </v-card>
-
-
-
     </div>
 </template>
 

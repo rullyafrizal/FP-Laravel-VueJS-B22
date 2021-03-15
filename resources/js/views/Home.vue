@@ -8,9 +8,9 @@
                 </v-btn>
             </div>
             <v-layout wrap>
-                <div v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id">
+                <v-flex xs15 sm8 md6 lg4 v-for="(campaign,index) in campaigns" :key="`campaign-` + campaign.id">
                     <campaign-item :campaign="campaign" />
-                </div>
+                </v-flex>
             </v-layout>
         </v-container>
 

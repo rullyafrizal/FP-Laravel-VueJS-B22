@@ -311,13 +311,16 @@ var render = function() {
             { attrs: { wrap: "" } },
             _vm._l(_vm.campaigns, function(campaign, index) {
               return _c(
-                "div",
-                { key: "campaign-" + campaign.id },
+                "v-flex",
+                {
+                  key: "campaign-" + campaign.id,
+                  attrs: { xs15: "", sm8: "", md6: "", lg4: "" }
+                },
                 [_c("campaign-item", { attrs: { campaign: campaign } })],
                 1
               )
             }),
-            0
+            1
           )
         ],
         1

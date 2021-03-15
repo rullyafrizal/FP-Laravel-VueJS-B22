@@ -100,7 +100,7 @@ class CampaignController extends Controller
     }
 
     public function search($keyword){
-        $campaigns = Campaign::select('*')->whereRaw('LOWER(title)', 'LIKE', '%'.strtolower($keyword).'%')->get();
+        $campaigns = Campaign::select('*')->whereRaw('(title)', 'ilike', '%'.$keyword.'%')->get();
 
         $data['campaigns'] = $campaigns;
 

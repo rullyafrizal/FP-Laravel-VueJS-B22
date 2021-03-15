@@ -128,17 +128,7 @@ var render = function() {
               "prepend-inner-icon": "mdi-magnify",
               "solo-inverted": ""
             },
-            on: {
-              keyup: function($event) {
-                if (
-                  !$event.type.indexOf("key") &&
-                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                ) {
-                  return null
-                }
-                return _vm.doSearch($event)
-              }
-            },
+            on: { input: _vm.doSearch },
             model: {
               value: _vm.keyword,
               callback: function($$v) {

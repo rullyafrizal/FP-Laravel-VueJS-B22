@@ -19,9 +19,9 @@
         <!--Menampilkan Hasil Pencarian-->
             <v-container class="ma-0 pa-0 mx-auto" grid list-sm>
                 <v-layout wrap>
-                    <div v-for="(campaign) in campaigns" :key="`campaign-` + campaign.id">
+                    <v-flex xs15 sm8 md6 lg4 v-for="(campaign) in campaigns" :key="`campaign-` + campaign.id">
                         <campaign-item :campaign="campaign" @click.native="close" />
-                    </div>
+                    </v-flex>
                     <v-alert v-if="campaigns.length === 0 && keyword.length > 0" color="warning" class="white--text">
                         Hasil pencarian tidak ditemukan
                     </v-alert>

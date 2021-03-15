@@ -14,7 +14,7 @@
                     </v-card-text>
                 </v-card>
             </v-col>
-            <v-col cols="6" md="8" sm="6">
+            <v-col cols="6" md="4" sm="2">
                 <v-card elevation="2" class="pa-2 mx-1 my-1 rounded-xl" tile-outlined>
                     <v-card-text>
                         <v-simple-table>

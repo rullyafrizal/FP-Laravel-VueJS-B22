@@ -70,7 +70,8 @@ export default {
                     'name': this.name
                 }
                 let url = '/api/auth/register'
-                axios.post(url, formData).then((response) => {
+                axios.post(url, formData)
+                    .then((response) => {
                     this.setAlert({
                         status: true,
                         color: 'primary',

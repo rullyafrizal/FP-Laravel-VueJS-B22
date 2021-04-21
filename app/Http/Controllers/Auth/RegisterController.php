@@ -23,15 +23,13 @@ class RegisterController extends Controller
      */
     public function __invoke(RegisterRequest $request, User $user)
     {
-
         try {
-            $user = User::where('email', request('email'))->first();
-
             User::create([
                 'name' => request('name'),
                 'email' => request('email'),
             ]);
 
+            $user = User::where('email', request('email'))->firstOrFail();
 
             OTP_Code::create([
                 'user_id' => $user->id,

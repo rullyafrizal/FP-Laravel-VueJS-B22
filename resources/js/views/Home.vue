@@ -49,20 +49,24 @@
             blogs: []
         }),
         created(){
-            axios.get('api/campaign/random/3').then((response) => {
-                let{data} = response.data;
-                this.campaigns = data.campaigns;
-            }).catch((error) => {
-                let{response} = error;
-                console.log(response);
-            });
-            axios.get('api/blog/random/2').then((response) => {
-                let{data} = response.data;
-                this.blogs = data.blogs;
-            }).catch((error) => {
-                let {response} = error;
-                console.log(error);
-            });
+            axios.get('api/campaign/random/3')
+                .then((response) => {
+                    let{data} = response.data;
+                    this.campaigns = data.campaigns;
+                })
+                .catch((error) => {
+                    let{response} = error;
+                    console.log(response);
+                });
+            axios.get('api/blog/random/2')
+                .then((response) => {
+                    let{data} = response.data;
+                    this.blogs = data.blogs;
+                })
+                .catch((error) => {
+                    let {response} = error;
+                    console.log(error);
+                });
         },
         methods: {
             progress(campaign){

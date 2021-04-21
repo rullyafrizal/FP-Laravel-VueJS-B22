@@ -31,8 +31,6 @@ class UpdateProfileController extends Controller
             $path_file = $folder . $nama_file;
             $filePhoto->move(public_path($folder), $nama_file);
 
-
-
             $user = $request->user();
             $user->name = request('name');
             $user->address = request('address');

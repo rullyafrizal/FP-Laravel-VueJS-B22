@@ -74,7 +74,7 @@ export default {
                 }
                 let url = '/api/auth/login'
                 axios.post(url, formData).then((response) => {
-                    let{data} = response.data;
+                    let { data } = response.data;
                     this.setAuth(data);
                     if(this.currentUser.user.id.length > 0) {
                         this.setAlert({
@@ -83,7 +83,7 @@ export default {
                             text: 'Login Success'
                         });
                         this.close();
-                        window.location.href = '/'
+                        window.location.reload();
                     } else {
                         this.setAlert({
                             status: true,

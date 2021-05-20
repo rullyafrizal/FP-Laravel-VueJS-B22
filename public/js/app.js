@@ -2242,9 +2242,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           text: 'Successfully Logout'
         });
 
-        _this.$router.push({
-          name: 'home'
-        });
+        window.location.reload();
       })["catch"](function (error) {
         var responses = error.response;
         console.log(responses);
@@ -66126,7 +66124,7 @@ router.beforeEach(function (to, from, next) {
   })) {
     var auth = JSON.parse(localStorage.getItem('equifund')).auth;
 
-    if (auth.user.token) {
+    if (auth.user) {
       next();
     } else {
       alert('Access Restricted');

@@ -19,11 +19,13 @@ export default {
                 }
             }
             let url = '/api/auth/check-token'
-            axios.post(url, {}, config).then((response) => {
-                commit('set', payload)
-            }).catch((error) => {
-                commit('set', {})
-            })
+            axios.post(url, {}, config)
+                .then((response) => {
+                    commit('set', payload)
+                })
+                .catch((error) => {
+                    commit('set', {})
+                })
         }
     },
     getters: {

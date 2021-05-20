@@ -12,7 +12,10 @@
                 <v-progress-linear class="rounded-pill" color="indigo darken-4" height="15" :value="progress" striped><strong class="white--text">{{progress}}%</strong></v-progress-linear>
                 <v-card-text>
                     <v-icon>mdi-cash</v-icon> &nbsp;
-                    <b>Rp{{campaign.required.toLocaleString('id-ID')}}</b>
+                    <b>{{new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).format(campaign.required)}}</b>
                 </v-card-text>
             </v-card>
         </v-hover>

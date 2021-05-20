@@ -105,7 +105,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
             _this.close();
 
-            window.location.href = '/';
+            window.location.reload();
           } else {
             _this.setAlert({
               status: true,

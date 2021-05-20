@@ -98,6 +98,7 @@ export default {
                 axios.post(url, formData, {
                     headers: {
                         'Authorization': `Bearer ${this.currentUser.token}`,
+                        'Content-Type': 'multipart/form-data'
                     }
                 }).then((response) => {
                     let codeResponse = response.data.response_code;

@@ -31,11 +31,17 @@
                         </tr>
                         <tr>
                             <td><v-icon>mdi-hand-heart</v-icon> Terkumpul</td>
-                            <td class="blue--text">Rp{{campaign.collected.toLocaleString('id-ID')}}</td>
+                            <td class="blue--text">{{new Intl.NumberFormat('id-ID', {
+                                style: 'currency',
+                                currency: 'IDR'
+                            }).format(campaign.collected)}}</td>
                         </tr>
                         <tr>
                             <td><v-icon>mdi-cash</v-icon> Dibutuhkan</td>
-                            <td class="orange--text">Rp{{campaign.required.toLocaleString('id-ID')}}</td>
+                            <td class="orange--text">{{new Intl.NumberFormat('id-ID', {
+                                style: 'currency',
+                                currency: 'IDR'
+                            }).format(campaign.required)}}</td>
                         </tr>
                         <tr>
                             <td><v-icon>mdi-progress-check</v-icon> Progress</td>
@@ -70,14 +76,14 @@ export default {
     methods: {
         go(){
             let{id} = this.$route.params;
-            let url = '/api/campaign/' + id;
+            let url = `/api/campaign/${id}`;
             axios.get(url).then((response) => {
                 let{data} = response.data;
                 this.campaign = data.campaign;
             }).catch((error) => {
                 let{responses} = error;
                 console.log(responses);
-            })
+            });
         },
         ...mapMutations({
             tambahTransaksi : 'transactions/insert'

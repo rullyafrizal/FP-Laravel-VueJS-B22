@@ -74,6 +74,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Campaign",
@@ -91,7 +97,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var _this = this;
 
       var id = this.$route.params.id;
-      var url = '/api/campaign/' + id;
+      var url = "/api/campaign/".concat(id);
       axios.get(url).then(function (response) {
         var data = response.data.data;
         _this.campaign = data.campaign;
@@ -238,8 +244,12 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", { staticClass: "blue--text" }, [
                       _vm._v(
-                        "Rp" +
-                          _vm._s(_vm.campaign.collected.toLocaleString("id-ID"))
+                        _vm._s(
+                          new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR"
+                          }).format(_vm.campaign.collected)
+                        )
                       )
                     ])
                   ]),
@@ -256,8 +266,12 @@ var render = function() {
                     _vm._v(" "),
                     _c("td", { staticClass: "orange--text" }, [
                       _vm._v(
-                        "Rp" +
-                          _vm._s(_vm.campaign.required.toLocaleString("id-ID"))
+                        _vm._s(
+                          new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR"
+                          }).format(_vm.campaign.required)
+                        )
                       )
                     ])
                   ]),

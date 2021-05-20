@@ -62,7 +62,7 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     if (to.matched.some(route => route.meta.requiresAuth)) {
         let auth = JSON.parse(localStorage.getItem('equifund')).auth
-        if (auth.user.token) {
+        if (auth.user) {
             next();
         } else {
             alert('Access Restricted')

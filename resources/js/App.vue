@@ -190,23 +190,24 @@ export default {
                     'Authorization': 'Bearer ' + this.user.token
                 }
             }
-            axios.post('/api/auth/logout', {}, config).then((response) => {
-                this.setAuth({})
-                this.setAlert({
-                    status: true,
-                    color: 'success',
-                    text: 'Successfully Logout'
+            axios.post('/api/auth/logout', {}, config)
+                .then((response) => {
+                    this.setAuth({})
+                    this.setAlert({
+                        status: true,
+                        color: 'success',
+                        text: 'Successfully Logout'
+                    })
+                    window.location.reload();
+                }).catch((error) => {
+                    let responses = error.response;
+                    console.log(responses);
+                    this.setAlert({
+                        status: true,
+                        color: 'error',
+                        text: data.message
+                    })
                 })
-                this.$router.push({name: 'home'});
-            }).catch((error) => {
-                let responses = error.response;
-                console.log(responses);
-                this.setAlert({
-                    status: true,
-                    color: 'error',
-                    text: data.message
-                })
-            })
         }
     },
     mounted(){
@@ -219,13 +220,15 @@ export default {
             let url = '/api/profile/get-profile'
             axios.get(url, {headers: {
                     'Authorization': `token ${this.user.token}`
-                }}).then((response) => {
-                let{data} = response.data;
-                this.profile = data.profile;
-            }).catch((error) => {
-                let{responses} = error;
-                console.log(responses);
-            })
+                }})
+                .then((response) => {
+                    let{data} = response.data;
+                    this.profile = data.profile;
+                })
+                .catch((error) => {
+                    let{responses} = error;
+                    console.log(responses);
+                })
         }
     }
 }

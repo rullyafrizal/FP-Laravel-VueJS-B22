@@ -29,6 +29,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "campaign-item",
   props: ['campaign'],
@@ -214,8 +217,12 @@ var render = function() {
                     _vm._v("  \n            "),
                     _c("b", [
                       _vm._v(
-                        "Rp" +
-                          _vm._s(_vm.campaign.required.toLocaleString("id-ID"))
+                        _vm._s(
+                          new Intl.NumberFormat("id-ID", {
+                            style: "currency",
+                            currency: "IDR"
+                          }).format(_vm.campaign.required)
+                        )
                       )
                     ])
                   ],
